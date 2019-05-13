@@ -9,5 +9,12 @@ services:
             - { name: doctrine.event_subscriber, connection: default }
 
     Softspring\DoctrineChangeLogBundle\EventListener\ChangesCollectorListener:
+        arguments:
+            $requestStack: '@request_stack'
+            $em: '@doctrine.orm.entity_manager'
+            $tokenStorage: '@Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface'
+            $changesStack: '@Softspring\DoctrineChangeLogBundle\Collector\ChangesStack'
         tags:
             - { name: kernel.event_subscriber }
+
+    Softspring\DoctrineChangeLogBundle\Collector\ChangesStack: ~

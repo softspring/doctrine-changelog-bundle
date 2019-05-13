@@ -2,6 +2,7 @@
 
 namespace Softspring\DoctrineChangeLogBundle\Event;
 
+use Softspring\DoctrineChangeLogBundle\Model\ChangeLog;
 use Symfony\Component\EventDispatcher\Event;
 
 abstract class AbstractChangeEvent extends Event
@@ -17,9 +18,9 @@ abstract class AbstractChangeEvent extends Event
     protected $entity;
 
     /**
-     * @var array
+     * @var ChangeLog
      */
-    protected $changes;
+    protected $changeLog;
 
     /**
      * AbstractChangeEvent constructor.
@@ -31,7 +32,7 @@ abstract class AbstractChangeEvent extends Event
     {
         $this->identifier = $identifier;
         $this->entity = $entity;
-        $this->changes = $changes;
+        $this->changeLog = new ChangeLog($identifier, get_class($entity), $changes);
     }
 
     /**
@@ -51,10 +52,10 @@ abstract class AbstractChangeEvent extends Event
     }
 
     /**
-     * @return array
+     * @return ChangeLog
      */
-    public function getChanges(): array
+    public function getChangeLog(): ChangeLog
     {
-        return $this->changes;
+        return $this->changeLog;
     }
 }
