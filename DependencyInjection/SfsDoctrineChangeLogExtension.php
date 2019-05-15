@@ -20,6 +20,10 @@ class SfsDoctrineChangeLogExtension extends Extension
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config/services'));
 
         $loader->load('doctrine_changes_listener.yaml');
+        $loader->load('collector_listeners.yaml');
 
+        // make configurable
+        $loader->load('storage_driver/doctrine.yaml');
+        $loader->load('storage.yaml');
     }
 }

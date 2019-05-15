@@ -6,10 +6,10 @@ use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 use Doctrine\ORM\Events;
 use Doctrine\ORM\UnitOfWork;
+use Softspring\DoctrineChangeLogBundle\Annotation\AnnotationReader;
 use Softspring\DoctrineChangeLogBundle\Event\DeletionChangeEvent;
 use Softspring\DoctrineChangeLogBundle\Event\InsertionChangeEvent;
 use Softspring\DoctrineChangeLogBundle\Event\UpdateChangeEvent;
-use Softspring\DoctrineChangeLogBundle\Metadata\MetadataReader;
 use Softspring\DoctrineChangeLogBundle\SfsDoctrineChangeLogEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -21,16 +21,16 @@ class DoctrineChangesListener implements EventSubscriber
     protected $eventDispatcher;
 
     /**
-     * @var MetadataReader
+     * @var AnnotationReader
      */
     protected $metadataReader;
 
     /**
      * DoctrineChangesListener constructor.
      * @param EventDispatcherInterface $eventDispatcher
-     * @param MetadataReader $metadataReader
+     * @param AnnotationReader $metadataReader
      */
-    public function __construct(EventDispatcherInterface $eventDispatcher, MetadataReader $metadataReader)
+    public function __construct(EventDispatcherInterface $eventDispatcher, AnnotationReader $metadataReader)
     {
         $this->eventDispatcher = $eventDispatcher;
         $this->metadataReader = $metadataReader;
