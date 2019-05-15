@@ -33,7 +33,7 @@ class ChangesPersistListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            KernelEvents::FINISH_REQUEST => [
+            KernelEvents::TERMINATE => [
                 [ 'onTerminateStoreStack', 0 ]
             ],
 
