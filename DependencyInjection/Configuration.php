@@ -12,6 +12,15 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder('sfs_doctrine_change_log');
         $rootNode = $treeBuilder->getRootNode();
 
+        $rootNode
+            ->children()
+                ->enumNode('driver')
+                    ->defaultValue('doctrine')
+                    ->values(['doctrine'])
+                ->end()
+            ->end()
+        ;
+
         return $treeBuilder;
     }
 }

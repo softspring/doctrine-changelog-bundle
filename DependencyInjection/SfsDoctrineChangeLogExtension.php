@@ -2,7 +2,6 @@
 
 namespace Softspring\DoctrineChangeLogBundle\DependencyInjection;
 
-use Softspring\MailerBundle\DependencyInjection\Configuration;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -17,13 +16,16 @@ class SfsDoctrineChangeLogExtension extends Extension
         $configuration = new Configuration();
         $config = $processor->processConfiguration($configuration, $configs);
 
+        $driver = $config['driver'];
+
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config/services'));
 
         $loader->load('doctrine_changes_listener.yaml');
         $loader->load('collector_listeners.yaml');
 
-        // make configurable
-        $loader->load('storage_driver/doctrine.yaml');
-        $loader->load('storage.yaml');
+        if ($driver === 'doctrine') {
+            $loader->load('storage_driver/doctrine.yaml');
+            $loader->load('storage.yaml');
+        }
     }
 }
