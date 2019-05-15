@@ -1,15 +1,13 @@
 <?php
 
-namespace Softspring\DoctrineChangeLogBundle\Metadata;
+namespace Softspring\DoctrineChangeLogBundle\Annotation;
 
-use Doctrine\Common\Annotations\AnnotationReader;
-use Softspring\DoctrineChangeLogBundle\Annotation\Ignored;
-use Softspring\DoctrineChangeLogBundle\Annotation\Registrable;
+use Doctrine\Common\Annotations\AnnotationReader as DoctrineAnnotationReader;
 
-class MetadataReader
+class AnnotationReader
 {
     /**
-     * @var AnnotationReader
+     * @var DoctrineAnnotationReader
      */
     protected $reader;
 
@@ -19,7 +17,7 @@ class MetadataReader
      */
     public function __construct()
     {
-        $this->reader = new AnnotationReader();
+        $this->reader = new DoctrineAnnotationReader();
     }
 
     /**

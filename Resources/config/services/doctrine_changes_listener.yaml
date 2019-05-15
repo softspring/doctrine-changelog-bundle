@@ -1,10 +1,10 @@
 services:
-    Softspring\DoctrineChangeLogBundle\Metadata\MetadataReader: ~
+    Softspring\DoctrineChangeLogBundle\Annotation\AnnotationReader: ~
 
     Softspring\DoctrineChangeLogBundle\EventListener\DoctrineChangesListener:
         arguments:
             $eventDispatcher: '@Symfony\Component\EventDispatcher\EventDispatcherInterface'
-            $metadataReader: '@Softspring\DoctrineChangeLogBundle\Metadata\MetadataReader'
+            $metadataReader: '@Softspring\DoctrineChangeLogBundle\Annotation\AnnotationReader'
         tags:
             - { name: doctrine.event_subscriber, connection: default }
 
