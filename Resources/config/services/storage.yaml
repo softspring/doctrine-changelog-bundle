@@ -1,0 +1,4 @@
+services:
+    Softspring\DoctrineChangeLogBundle\EventListener\ChangesPersistListener:
+        arguments: ['@Softspring\DoctrineChangeLogBundle\Storage\StorageDriverInterface', '@Softspring\DoctrineChangeLogBundle\Collector\ChangesStack']
+        tags: ['kernel.event_subscriber']

@@ -1,0 +1,6 @@
+services:
+    Softspring\DoctrineChangeLogBundle\Storage\DoctrineStorageDriver:
+        arguments: ['@doctrine.orm.entity_manager', 'App\Entity\ChangeLog']
+
+    Softspring\DoctrineChangeLogBundle\Storage\StorageDriverInterface:
+        alias: 'Softspring\DoctrineChangeLogBundle\Storage\DoctrineStorageDriver'

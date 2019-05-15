@@ -2,12 +2,10 @@
 
 namespace Softspring\DoctrineChangeLogBundle\Collector;
 
-use Softspring\DoctrineChangeLogBundle\Model\ChangeLog;
-
 class ChangesStack
 {
     /**
-     * @var ChangeLog[]
+     * @var Changes[]
      */
     protected $changes;
 
@@ -19,12 +17,12 @@ class ChangesStack
         $this->changes = [];
     }
 
-    public function push(ChangeLog $change)
+    public function push(Changes $change)
     {
         array_push($this->changes, $change);
     }
 
-    public function pop(): ChangeLog
+    public function pop(): ?Changes
     {
         return array_pop($this->changes);
     }

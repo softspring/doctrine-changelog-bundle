@@ -1,10 +1,10 @@
 <?php
 
-namespace Softspring\DoctrineChangeLogBundle\Model;
+namespace Softspring\DoctrineChangeLogBundle\Collector;
 
 use Symfony\Component\HttpFoundation\ParameterBag;
 
-class ChangeLog
+class Changes
 {
     /**
      * @var int
