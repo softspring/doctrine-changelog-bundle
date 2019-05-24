@@ -38,6 +38,10 @@ class CollectUserListener implements EventSubscriberInterface
             return;
         }
 
-        $event->getChanges()->getAttributes()->set('username', $this->tokenStorage->getToken()->getUsername() ?? null);
+        if (! $token = $this->tokenStorage->getToken()) {
+            return;
+        }
+
+        $event->getChanges()->getAttributes()->set('username', $token->getUsername() ?? null);
     }
 }
