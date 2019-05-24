@@ -2,15 +2,15 @@
 
 namespace Softspring\DoctrineChangeLogBundle\Storage;
 
-use Softspring\DoctrineChangeLogBundle\Collector\Changes;
+use Softspring\DoctrineChangeLogBundle\Collector\ChangeEntry;
 use Softspring\DoctrineChangeLogBundle\Collector\ChangesStack;
 
 interface StorageDriverInterface
 {
     /**
-     * @param Changes $changes
+     * @param ChangeEntry $entry
      */
-    public function save(Changes $changes): void;
+    public function save(ChangeEntry $entry): void;
 
     /**
      * @param ChangesStack $changesStack

@@ -4,7 +4,7 @@ namespace Softspring\DoctrineChangeLogBundle\Collector;
 
 use Symfony\Component\HttpFoundation\ParameterBag;
 
-class Changes
+class ChangeEntry
 {
     /**
      * @var int

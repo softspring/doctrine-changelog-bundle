@@ -3,7 +3,7 @@
 namespace Softspring\DoctrineChangeLogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Softspring\DoctrineChangeLogBundle\Collector\Changes;
+use Softspring\DoctrineChangeLogBundle\Collector\ChangeEntry;
 
 /**
  * @ORM\MappedSuperclass()
@@ -82,30 +82,30 @@ class ChangeLog
     protected $changes;
 
     /**
-     * @param Changes $changes
+     * @param ChangeEntry $entry
      * @return ChangeLog
      */
-    public static function create(Changes $changes)
+    public static function create(ChangeEntry $entry)
     {
         $changeLog = new static();
 
         // set basic data
-        $changeLog->setTimestamp($changes->getTimestamp());
-        $changeLog->setEntityClass($changes->getEntityClass());
-        $changeLog->setEntityId($changes->getEntityIdentifier());
-        $changeLog->setChanges($changes->getChanges());
+        $changeLog->setTimestamp($entry->getTimestamp());
+        $changeLog->setEntityClass($entry->getEntityClass());
+        $changeLog->setEntityId($entry->getEntityIdentifier());
+        $changeLog->setChanges($entry->getChanges());
 
         // set action
-        $changeLog->setAction($changes->getAttributes()->get('action'));
+        $changeLog->setAction($entry->getAttributes()->get('action'));
 
         // set username
-        $changeLog->setUsername($changes->getAttributes()->get('username'));
+        $changeLog->setUsername($entry->getAttributes()->get('username'));
 
         // set request data
-        $changeLog->setIp($changes->getAttributes()->get('client_ip'));
-        $changeLog->setUserAgent($changes->getAttributes()->get('user_agent'));
-        $changeLog->setRequestPath($changes->getAttributes()->get('request_path'));
-        $changeLog->setRequestMethod($changes->getAttributes()->get('request_method'));
+        $changeLog->setIp($entry->getAttributes()->get('client_ip'));
+        $changeLog->setUserAgent($entry->getAttributes()->get('user_agent'));
+        $changeLog->setRequestPath($entry->getAttributes()->get('request_path'));
+        $changeLog->setRequestMethod($entry->getAttributes()->get('request_method'));
 
         return $changeLog;
     }

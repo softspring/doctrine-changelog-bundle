@@ -43,6 +43,6 @@ class CollectChangesListener implements EventSubscriberInterface
 
     public function onChangeCollectEvent(AbstractChangeEvent $event)
     {
-        $this->changesStack->push($event->getChanges());
+        $this->changesStack->push($event->getEntry());
     }
 }

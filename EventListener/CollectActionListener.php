@@ -27,16 +27,16 @@ class CollectActionListener implements EventSubscriberInterface
 
     public function onInsertionAddAction(InsertionChangeEvent $event)
     {
-        $event->getChanges()->getAttributes()->set('action', 'insertion');
+        $event->getEntry()->getAttributes()->set('action', 'insertion');
     }
 
     public function onUpdateAddAction(UpdateChangeEvent $event)
     {
-        $event->getChanges()->getAttributes()->set('action', 'update');
+        $event->getEntry()->getAttributes()->set('action', 'update');
     }
 
     public function onDeletionAddAction(DeletionChangeEvent $event)
     {
-        $event->getChanges()->getAttributes()->set('action', 'deletion');
+        $event->getEntry()->getAttributes()->set('action', 'deletion');
     }
 }

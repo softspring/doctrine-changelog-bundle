@@ -1,3 +1,0 @@
-services:
-    Softspring\DoctrineChangeLogBundle\Command\BigQueryCreateStructureCommand:
-        tags: ['console.command']

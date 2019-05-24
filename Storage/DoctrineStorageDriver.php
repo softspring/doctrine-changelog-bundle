@@ -3,7 +3,7 @@
 namespace Softspring\DoctrineChangeLogBundle\Storage;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Softspring\DoctrineChangeLogBundle\Collector\Changes;
+use Softspring\DoctrineChangeLogBundle\Collector\ChangeEntry;
 use Softspring\DoctrineChangeLogBundle\Collector\ChangesStack;
 use Softspring\DoctrineChangeLogBundle\Entity\ChangeLog;
 
@@ -30,9 +30,9 @@ class DoctrineStorageDriver implements StorageDriverInterface
         $this->changeLogClass = $changeLogClass;
     }
 
-    public function save(Changes $changes): void
+    public function save(ChangeEntry $entry): void
     {
-        $this->em->persist(ChangeLog::create($changes));
+        $this->em->persist(ChangeLog::create($entry));
         $this->em->flush();
     }
 

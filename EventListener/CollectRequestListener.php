@@ -41,9 +41,9 @@ class CollectRequestListener implements EventSubscriberInterface
             return;
         }
 
-        $event->getChanges()->getAttributes()->set('client_ip', $request->getClientIp());
-        $event->getChanges()->getAttributes()->set('user_agent', $request->headers->get('User-Agent'));
-        $event->getChanges()->getAttributes()->set('request_method', $request->getMethod());
-        $event->getChanges()->getAttributes()->set('request_path', $request->getPathInfo());
+        $event->getEntry()->getAttributes()->set('request_ip', $request->getClientIp());
+        $event->getEntry()->getAttributes()->set('user_agent', $request->headers->get('User-Agent'));
+        $event->getEntry()->getAttributes()->set('request_method', $request->getMethod());
+        $event->getEntry()->getAttributes()->set('request_path', $request->getPathInfo());
     }
 }

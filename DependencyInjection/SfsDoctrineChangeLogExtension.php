@@ -19,7 +19,6 @@ class SfsDoctrineChangeLogExtension extends Extension
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config/services'));
 
         $loader->load('doctrine_changes_listener.yaml');
-        $loader->load('commands.yaml');
 
         foreach (array_keys(array_filter($config['collect'])) as $collector) {
             $loader->load("collector/{$collector}.yaml");
@@ -31,38 +30,73 @@ class SfsDoctrineChangeLogExtension extends Extension
             $loader->load("storage_driver/{$config['storage']['driver']}.yaml");
 
             $container->setParameter('sfs_doctrine_changelog.storage.driver', $config['storage']['driver']);
-            $container->setParameter('sfs_doctrine_changelog.storage.options', $config['storage']['options']);
+
+            $this->processBigQuery($config, $container);
+        }
+    }
+
+    private function processBigQuery(array $config, ContainerBuilder $container)
+    {
+        if ($config['storage']['driver'] != 'big-query') {
+            return;
         }
 
-        if ($config['storage']['driver'] == 'big-query') {
-            // default bigQuery fields
-            $bigQueryFields = [
-                ['name' => 'id',             'type' => 'INTEGER',  'mode' => 'REQUIRED'],
-                ['name' => 'timestamp',      'type' => 'INTEGER',  'mode' => 'REQUIRED'],
-                ['name' => 'entity_class',   'type' => 'STRING',   'mode' => ''],
-                ['name' => 'entity_id',      'type' => 'STRING',   'mode' => ''],
-                ['name' => 'changes',        'type' => 'STRING',   'mode' => ''],
+        $bigQueryOptions = [];
 
-                // TODO check if user collector is present
-                ['name' => 'username',       'type' => 'STRING',   'mode' => ''],
+        // SET GLOBAL OPTIONS
 
-                // TODO check if request collector is present
-                ['name' => 'request_ip',     'type' => 'STRING',   'mode' => ''],
-                ['name' => 'user_agent',     'type' => 'STRING',   'mode' => ''],
-                ['name' => 'request_method', 'type' => 'STRING',   'mode' => ''],
-                ['name' => 'request_path',   'type' => 'STRING',   'mode' => ''],
+        $bigQueryOptions['project'] = $config['storage']['big_query']['project'];
+        $bigQueryOptions['dataset'] = $config['storage']['big_query']['dataset'];
+        $bigQueryOptions['location'] = $config['storage']['big_query']['location'];
 
-                // TODO check if action collector is present
-                ['name' => 'action',         'type' => 'STRING',   'mode' => ''],
-            ];
+        // SET TABLE OPTIONS
 
-            if (is_array($config['storage']['options']['schema']['extra_fields'])) {
-                $bigQueryFields = array_merge($bigQueryFields, $config['storage']['options']['schema']['extra_fields']);
-            }
+        $bigQueryOptions['table']['mode'] = $config['storage']['big_query']['table']['mode'];
 
-            $container->setParameter('sfs_doctrine_changelog.storage.big_query.schema', [
-                'fields' => $bigQueryFields,
-            ]);
+        if ($bigQueryOptions['table']['mode'] == 'fixed') {
+            $bigQueryOptions['table']['name'] = $config['storage']['big_query']['table']['fixed']['name'];
         }
+
+        if ($bigQueryOptions['table']['mode'] == 'attribute') {
+            $bigQueryOptions['table']['prefix'] = $config['storage']['big_query']['table']['attribute']['prefix'];
+            $bigQueryOptions['table']['attribute_name'] = $config['storage']['big_query']['table']['attribute']['attribute_name'];
+        }
+
+        if ($bigQueryOptions['table']['mode'] == 'service') {
+            $bigQueryOptions['table']['service'] = $config['storage']['big_query']['table']['service'];
+        }
+
+        // SET SCHEMA OPTIONS
+
+        $bigQueryFields = [
+            ['name' => 'id',            'type' => 'integer',  'mode' => 'required'],
+            ['name' => 'timestamp',     'type' => 'integer',  'mode' => 'required'],
+            ['name' => 'entity_class',  'type' => 'string',   'mode' => ''],
+            ['name' => 'entity_id',     'type' => 'string',   'mode' => ''],
+            ['name' => 'changes',       'type' => 'string',   'mode' => ''],
+        ];
+
+        if ($config['collect']['user']) {
+            $bigQueryFields[] = ['name' => 'username', 'type' => 'string', 'mode' => ''];
+        }
+
+        if ($config['collect']['request']) {
+            $bigQueryFields[] = ['name' => 'request_ip',     'type' => 'string', 'mode' => ''];
+            $bigQueryFields[] = ['name' => 'user_agent',     'type' => 'string', 'mode' => ''];
+            $bigQueryFields[] = ['name' => 'request_method', 'type' => 'string', 'mode' => ''];
+            $bigQueryFields[] = ['name' => 'request_path',   'type' => 'string', 'mode' => ''];
+        }
+
+        if ($config['collect']['action']) {
+            $bigQueryFields[] = ['name' => 'action', 'type' => 'string', 'mode' => ''];
+        }
+
+        if (isset($config['storage']['big_query']['schema']['extra_fields'])) {
+            $bigQueryFields = array_merge($bigQueryFields, $config['storage']['big_query']['schema']['extra_fields']);
+        }
+
+        $bigQueryOptions['schema']['fields'] = $bigQueryFields;
+
+        $container->setParameter('sfs_doctrine_changelog.storage.big_query', $bigQueryOptions);
     }
 }
