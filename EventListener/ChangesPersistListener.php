@@ -43,6 +43,8 @@ class ChangesPersistListener implements EventSubscriberInterface
 
     public function onTerminateStoreStack()
     {
-        $this->storageDriver->saveStack($this->changesStack);
+        if ($this->changesStack->count()) {
+            $this->storageDriver->saveStack($this->changesStack);
+        }
     }
 }

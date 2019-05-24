@@ -1,0 +1,4 @@
+services:
+    Softspring\DoctrineChangeLogBundle\EventListener\CollectChangesListener:
+        arguments: ['@Softspring\DoctrineChangeLogBundle\Collector\ChangesStack']
+        tags: ['kernel.event_subscriber']

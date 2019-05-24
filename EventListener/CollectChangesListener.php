@@ -30,33 +30,15 @@ class CollectChangesListener implements EventSubscriberInterface
     {
         return [
             SfsDoctrineChangeLogEvents::INSERTION => [
-                ['onInsertionAddAction', 100],
                 ['onChangeCollectEvent', -100],
             ],
             SfsDoctrineChangeLogEvents::UPDATE => [
-                ['onUpdateAddAction', 100],
                 ['onChangeCollectEvent', -100],
             ],
             SfsDoctrineChangeLogEvents::DELETION => [
-                ['onDeletionAddAction', 100],
                 ['onChangeCollectEvent', -100],
             ],
         ];
-    }
-
-    public function onInsertionAddAction(InsertionChangeEvent $event)
-    {
-        $event->getChanges()->getAttributes()->set('action', 'insertion');
-    }
-
-    public function onUpdateAddAction(UpdateChangeEvent $event)
-    {
-        $event->getChanges()->getAttributes()->set('action', 'update');
-    }
-
-    public function onDeletionAddAction(DeletionChangeEvent $event)
-    {
-        $event->getChanges()->getAttributes()->set('action', 'deletion');
     }
 
     public function onChangeCollectEvent(AbstractChangeEvent $event)

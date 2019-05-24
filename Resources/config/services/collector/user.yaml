@@ -1,0 +1,4 @@
+services:
+    Softspring\DoctrineChangeLogBundle\EventListener\CollectUserListener:
+        arguments: ['@Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface']
+        tags: ['kernel.event_subscriber']

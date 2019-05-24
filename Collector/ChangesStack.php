@@ -2,7 +2,7 @@
 
 namespace Softspring\DoctrineChangeLogBundle\Collector;
 
-class ChangesStack
+class ChangesStack implements \Countable
 {
     /**
      * @var Changes[]
@@ -15,6 +15,11 @@ class ChangesStack
     public function __construct()
     {
         $this->changes = [];
+    }
+
+    public function count()
+    {
+        return sizeof($this->changes);
     }
 
     public function push(Changes $change)

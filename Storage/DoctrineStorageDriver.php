@@ -38,14 +38,10 @@ class DoctrineStorageDriver implements StorageDriverInterface
 
     public function saveStack(ChangesStack $changesStack): void
     {
-        $doFlush = false;
         while ($changes = $changesStack->pop()) {
             $this->em->persist(call_user_func([$this->changeLogClass, 'create'], $changes));
-            $doFlush = true;
         }
 
-        if ($doFlush) {
-            $this->em->flush();
-        }
+        $this->em->flush();
     }
 }

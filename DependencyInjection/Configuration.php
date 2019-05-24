@@ -14,10 +14,30 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->enumNode('driver')
-                    ->defaultValue('doctrine')
-                    ->values(['doctrine'])
+
+                ->arrayNode('collect')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->booleanNode('request')->defaultTrue()->end()
+                        ->booleanNode('user')->defaultTrue()->end()
+                        ->booleanNode('action')->defaultTrue()->end()
+                    ->end()
                 ->end()
+
+                ->arrayNode('storage')
+                    ->addDefaultsIfNotSet()
+                    ->canBeEnabled()
+                    ->children()
+                        ->enumNode('driver')
+                            ->values(['doctrine', 'big-query'])
+                            ->isRequired()
+                        ->end()
+                        ->arrayNode('options')
+                            ->variablePrototype()
+                        ->end()
+                    ->end()
+                ->end()
+
             ->end()
         ;
 

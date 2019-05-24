@@ -1,0 +1,13 @@
+services:
+    sfs_doctrine_changelog.storage.big_query_client:
+        class: Google\Cloud\BigQuery\BigQueryClient
+        public: true
+
+    Softspring\DoctrineChangeLogBundle\Storage\BigQueryStorageDriver:
+        arguments:
+            $bigQueryClient: '@sfs_doctrine_changelog.storage.big_query_client'
+            $options: '%sfs_doctrine_changelog.storage.options%'
+            $schema: '%sfs_doctrine_changelog.storage.big_query.schema%'
+
+    Softspring\DoctrineChangeLogBundle\Storage\StorageDriverInterface:
+        alias: 'Softspring\DoctrineChangeLogBundle\Storage\BigQueryStorageDriver'
