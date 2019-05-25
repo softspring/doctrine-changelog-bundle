@@ -17,6 +17,7 @@ services:
         arguments:
             $schema: '@Softspring\DoctrineChangeLogBundle\Storage\BigQuery\Schema'
             $changesProcessor: '@Softspring\DoctrineChangeLogBundle\Storage\BigQuery\ChangesProcessor'
+            $logger: '@logger'
 
     Softspring\DoctrineChangeLogBundle\Storage\BigQueryStorageDriver:
         arguments:

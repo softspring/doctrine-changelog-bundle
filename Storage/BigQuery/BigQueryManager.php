@@ -2,6 +2,7 @@
 
 namespace Softspring\DoctrineChangeLogBundle\Storage\BigQuery;
 
+use Psr\Log\LoggerInterface;
 use Softspring\DoctrineChangeLogBundle\Collector\ChangeEntry;
 
 class BigQueryManager
@@ -17,14 +18,21 @@ class BigQueryManager
     protected $changesProcessor;
 
     /**
+     * @var LoggerInterface
+     */
+    protected $logger;
+
+    /**
      * BigQueryManager constructor.
      * @param Schema $schema
      * @param ChangesProcessor $changesProcessor
+     * @param LoggerInterface $logger
      */
-    public function __construct(Schema $schema, ChangesProcessor $changesProcessor)
+    public function __construct(Schema $schema, ChangesProcessor $changesProcessor, LoggerInterface $logger)
     {
         $this->schema = $schema;
         $this->changesProcessor = $changesProcessor;
+        $this->logger = $logger;
     }
 
     /**
@@ -71,11 +79,18 @@ class BigQueryManager
                 $response = $table->insertRows($rows);
 
                 if (!$response->isSuccessful()) {
-                    // TODO LOG ERRORS
+                    foreach ($response->info()['insertErrors'] as $insertError) {
+                        if (sizeof($insertError['errors']) == 1) {
+                            $err = $insertError['errors'][0];
+                            $this->logger->error(sprintf('BigQuery error inserting row, reason: %s location: %s, message: %s', $err['reason'], $err['location'], $err['message']));
+                        } else {
+                            $this->logger->error(sprintf('BigQuery error inserting row because of multiple errors'));
+                        }
+                    }
                     $successful = false;
                 }
             } catch (\Exception $e) {
-                // TODO PROCESS EXCEPTION
+                $this->logger->error($e->getMessage());
                 $successful = false;
             }
         }
