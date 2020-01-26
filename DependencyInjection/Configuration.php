@@ -38,6 +38,8 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('project')
                                     ->isRequired()
                                 ->end()
+                                ->scalarNode('keyFilePath')
+                                ->end()
                                 ->scalarNode('dataset')
                                     ->isRequired()
                                 ->end()
@@ -52,6 +54,10 @@ class Configuration implements ConfigurationInterface
                                             ->isRequired()
                                             ->defaultValue('fixed')
                                             ->values(['fixed', 'attribute', 'service'])
+                                        ->end()
+
+                                        ->scalarNode('name')
+                                            ->defaultNull()
                                         ->end()
 
                                         ->arrayNode('fixed')

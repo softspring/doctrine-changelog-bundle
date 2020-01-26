@@ -2,6 +2,7 @@
 
 namespace Softspring\DoctrineChangeLogBundle\DependencyInjection;
 
+use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -39,6 +40,10 @@ class SfsDoctrineChangeLogExtension extends Extension
     {
         if ($config['storage']['driver'] != 'big-query') {
             return;
+        }
+
+        if (!class_exists('Google\Cloud\BigQuery\BigQueryClient')) {
+            throw new InvalidConfigurationException('Missing Google\Cloud\BigQuery\BigQueryClient class. BigQuery client libraries are required. Use composer require google/cloud-bigquery');
         }
 
         $bigQueryOptions = [];
@@ -98,5 +103,10 @@ class SfsDoctrineChangeLogExtension extends Extension
         $bigQueryOptions['schema']['fields'] = $bigQueryFields;
 
         $container->setParameter('sfs_doctrine_changelog.storage.big_query', $bigQueryOptions);
+
+        $container->setParameter('sfs_doctrine_changelog.storage.big_query.client_config', [
+            'projectId' => $config['storage']['big_query']['project'],
+            'keyFilePath' => $config['storage']['big_query']['keyFilePath'],
+        ]);
     }
 }

@@ -1,6 +1,8 @@
 services:
     sfs_doctrine_changelog.storage.big_query_client:
         class: Google\Cloud\BigQuery\BigQueryClient
+        arguments:
+            $config: '%sfs_doctrine_changelog.storage.big_query.client_config%'
 
     Softspring\DoctrineChangeLogBundle\Storage\BigQuery\Schema:
         arguments:
