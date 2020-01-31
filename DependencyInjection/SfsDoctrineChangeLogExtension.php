@@ -104,9 +104,16 @@ class SfsDoctrineChangeLogExtension extends Extension
 
         $container->setParameter('sfs_doctrine_changelog.storage.big_query', $bigQueryOptions);
 
-        $container->setParameter('sfs_doctrine_changelog.storage.big_query.client_config', [
-            'projectId' => $config['storage']['big_query']['project'],
-            'keyFilePath' => $config['storage']['big_query']['keyFilePath'],
-        ]);
+        $bigQueryClientConfig = [];
+
+        if ($project = $config['storage']['big_query']['project'] ?? null) {
+            $bigQueryClientConfig['projectId'] = $project;
+        }
+
+        if ($keyFilePath = $config['storage']['big_query']['keyFilePath'] ?? null) {
+            $bigQueryClientConfig['keyFilePath'] = $keyFilePath;
+        }
+
+        $container->setParameter('sfs_doctrine_changelog.storage.big_query.client_config', $bigQueryClientConfig);
     }
 }
