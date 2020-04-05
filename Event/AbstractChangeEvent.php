@@ -3,7 +3,7 @@
 namespace Softspring\DoctrineChangeLogBundle\Event;
 
 use Softspring\DoctrineChangeLogBundle\Collector\ChangeEntry;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 abstract class AbstractChangeEvent extends Event
 {

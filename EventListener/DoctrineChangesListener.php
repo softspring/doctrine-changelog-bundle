@@ -58,7 +58,7 @@ class DoctrineChangesListener implements EventSubscriber
             }
 
             $event = new InsertionChangeEvent($uow->getEntityIdentifier($entity), $entity, $changes);
-            $this->eventDispatcher->dispatch(SfsDoctrineChangeLogEvents::INSERTION, $event);
+            $this->eventDispatcher->dispatch($event, SfsDoctrineChangeLogEvents::INSERTION);
         }
 
         foreach ($uow->getScheduledEntityUpdates() as $entityId => $entity) {
@@ -71,7 +71,7 @@ class DoctrineChangesListener implements EventSubscriber
             }
 
             $event = new UpdateChangeEvent($uow->getEntityIdentifier($entity), $entity, $changes);
-            $this->eventDispatcher->dispatch(SfsDoctrineChangeLogEvents::UPDATE, $event);
+            $this->eventDispatcher->dispatch($event, SfsDoctrineChangeLogEvents::UPDATE);
         }
 
         foreach ($uow->getScheduledEntityDeletions() as $entityId => $entity) {
@@ -84,7 +84,7 @@ class DoctrineChangesListener implements EventSubscriber
             }
 
             $event = new DeletionChangeEvent($uow->getEntityIdentifier($entity), $entity, $changes);
-            $this->eventDispatcher->dispatch(SfsDoctrineChangeLogEvents::DELETION, $event);
+            $this->eventDispatcher->dispatch($event, SfsDoctrineChangeLogEvents::DELETION);
         }
 
         // TODO process collections
