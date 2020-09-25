@@ -3,6 +3,7 @@
 namespace Softspring\DoctrineChangeLogBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 use Doctrine\ORM\Events;
 use Doctrine\ORM\UnitOfWork;
@@ -53,7 +54,7 @@ class DoctrineChangesListener implements EventSubscriber
                 continue;
             }
 
-            if (empty($changes = $this->getChanges($entity, $uow))) {
+            if (empty($changes = $this->getChanges($entity, $uow, $em))) {
                 continue;
             }
 
@@ -66,7 +67,7 @@ class DoctrineChangesListener implements EventSubscriber
                 continue;
             }
 
-            if (empty($changes = $this->getChanges($entity, $uow))) {
+            if (empty($changes = $this->getChanges($entity, $uow, $em))) {
                 continue;
             }
 
@@ -79,7 +80,7 @@ class DoctrineChangesListener implements EventSubscriber
                 continue;
             }
 
-            if (empty($changes = $this->getChanges($entity, $uow))) {
+            if (empty($changes = $this->getChanges($entity, $uow, $em))) {
                 continue;
             }
 
@@ -93,18 +94,39 @@ class DoctrineChangesListener implements EventSubscriber
     }
 
     /**
-     * @param object $entity
-     * @param UnitOfWork $uow
+     * @param object                 $entity
+     * @param UnitOfWork             $uow
+     * @param EntityManagerInterface $em
+     *
      * @return array
      */
-    protected function getChanges(object $entity, UnitOfWork $uow): array
+    protected function getChanges(object $entity, UnitOfWork $uow, EntityManagerInterface $em): array
     {
+        $metadata = $em->getClassMetadata(get_class($entity));
         $changes = $uow->getEntityChangeSet($entity);
         $ignoredFields = $this->metadataReader->getIgnoredFields($entity);
 
         foreach (array_keys($ignoredFields) as $property) {
             if (isset($changes[$property])) {
                 unset($changes[$property]);
+            }
+        }
+
+        foreach ($changes as $field => [$old, $new]) {
+            if ($metadata->hasAssociation($field)) {
+                $association = $metadata->getAssociationMapping($field);
+                $a = 1;
+            } elseif ($metadata->hasField($field)) {
+                if (isset($metadata->embeddedClasses[$field])) {
+                    $embeddedMetadata = $metadata->embeddedClasses[$field];
+                    $b = 1;
+                } else {
+                    $mapping = $metadata->getFieldMapping($field);
+                    $a = 1;
+                }
+            } else {
+                $no = 1;
+                $a = 1;
             }
         }
 
