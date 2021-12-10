@@ -3,6 +3,7 @@
     "description": "Doctrine changelog collect and store into warehouse",
     "type": "symfony-bundle",
     "license": "MIT",
+    "minimum-stability": "dev",
     "require": {
         "php": ">=7.4"
     },
