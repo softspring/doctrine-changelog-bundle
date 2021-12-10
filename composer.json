@@ -3,6 +3,9 @@
     "description": "Doctrine changelog collect and store into warehouse",
     "type": "symfony-bundle",
     "license": "MIT",
+    "require": {
+        "php": "^7.4"
+    },
     "require-dev": {
     },
     "autoload": {
