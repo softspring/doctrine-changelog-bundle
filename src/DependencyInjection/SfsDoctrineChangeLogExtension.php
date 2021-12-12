@@ -17,7 +17,7 @@ class SfsDoctrineChangeLogExtension extends Extension
         $configuration = new Configuration();
         $config = $processor->processConfiguration($configuration, $configs);
 
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config/services'));
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../../config/services'));
 
         $loader->load('doctrine_changes_listener.yaml');
 
