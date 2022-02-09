@@ -82,7 +82,6 @@ class ChangeLog
     protected $changes;
 
     /**
-     * @param ChangeEntry $entry
      * @return ChangeLog
      */
     public static function create(ChangeEntry $entry)
@@ -110,177 +109,111 @@ class ChangeLog
         return $changeLog;
     }
 
-    /**
-     * @return int
-     */
     public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * @param int $id
-     */
     public function setId(int $id): void
     {
         $this->id = $id;
     }
 
-    /**
-     * @return int
-     */
     public function getTimestamp(): int
     {
         return $this->timestamp;
     }
 
-    /**
-     * @param int $timestamp
-     */
     public function setTimestamp(int $timestamp): void
     {
         $this->timestamp = $timestamp;
     }
 
-    /**
-     * @return string|null
-     */
     public function getUsername(): ?string
     {
         return $this->username;
     }
 
-    /**
-     * @param string|null $username
-     */
     public function setUsername(?string $username): void
     {
         $this->username = $username;
     }
 
-    /**
-     * @return string|null
-     */
     public function getEntityClass(): ?string
     {
         return $this->entityClass;
     }
 
-    /**
-     * @param string|null $entityClass
-     */
     public function setEntityClass(?string $entityClass): void
     {
         $this->entityClass = $entityClass;
     }
 
-    /**
-     * @return array|null
-     */
     public function getEntityId(): ?array
     {
         return $this->entityId;
     }
 
-    /**
-     * @param array|null $entityId
-     */
     public function setEntityId(?array $entityId): void
     {
         $this->entityId = $entityId;
     }
 
-    /**
-     * @return string|null
-     */
     public function getAction(): ?string
     {
         return $this->action;
     }
 
-    /**
-     * @param string|null $action
-     */
     public function setAction(?string $action): void
     {
         $this->action = $action;
     }
 
-    /**
-     * @return array
-     */
     public function getChanges(): array
     {
         return $this->changes;
     }
 
-    /**
-     * @param array $changes
-     */
     public function setChanges(array $changes): void
     {
         $this->changes = $changes;
     }
 
-    /**
-     * @return string|null
-     */
     public function getIp(): ?string
     {
         return $this->ip;
     }
 
-    /**
-     * @param string|null $ip
-     */
     public function setIp(?string $ip): void
     {
         $this->ip = $ip;
     }
 
-    /**
-     * @return string|null
-     */
     public function getUserAgent(): ?string
     {
         return $this->userAgent;
     }
 
-    /**
-     * @param string|null $userAgent
-     */
     public function setUserAgent(?string $userAgent): void
     {
         $this->userAgent = $userAgent;
     }
 
-    /**
-     * @return string|null
-     */
     public function getRequestMethod(): ?string
     {
         return $this->requestMethod;
     }
 
-    /**
-     * @param string|null $requestMethod
-     */
     public function setRequestMethod(?string $requestMethod): void
     {
         $this->requestMethod = $requestMethod;
     }
 
-    /**
-     * @return string|null
-     */
     public function getRequestPath(): ?string
     {
         return $this->requestPath;
     }
 
-    /**
-     * @param string|null $requestPath
-     */
     public function setRequestPath(?string $requestPath): void
     {
         $this->requestPath = $requestPath;

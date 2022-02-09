@@ -27,9 +27,6 @@ class Schema
 
     /**
      * Schema constructor.
-     * @param BigQueryClient $bigQueryClient
-     * @param array $config
-     * @param LoggerInterface $logger
      */
     public function __construct(BigQueryClient $bigQueryClient, array $config, LoggerInterface $logger)
     {
@@ -38,27 +35,16 @@ class Schema
         $this->logger = $logger;
     }
 
-    /**
-     * @param string $name
-     * @return Table
-     */
     public function getTable(string $name): Table
     {
         return $this->getOrCreateTable($name);
     }
 
-    /**
-     * @return Dataset
-     */
     public function getDataset(): Dataset
     {
         return $this->getOrCreateDataset();
     }
 
-    /**
-     * @param string $fieldName
-     * @return bool
-     */
     public function fieldDefined(string $fieldName): bool
     {
         foreach ($this->config['schema']['fields'] as $field) {
@@ -71,21 +57,19 @@ class Schema
     }
 
     /**
-     * @param ChangeEntry $entry
-     * @return string
      * @throws \Exception
      */
     public function getTargetTable(ChangeEntry $entry): string
     {
-        if ($this->config['table']['mode'] == 'fixed') {
+        if ('fixed' == $this->config['table']['mode']) {
             return $this->config['table']['name'];
         }
 
-        if ($this->config['table']['mode'] == 'service') {
+        if ('service' == $this->config['table']['mode']) {
             throw new \Exception('Table mode by service is not yet implemented');
         }
 
-        if ($this->config['table']['mode'] == 'attribute') {
+        if ('attribute' == $this->config['table']['mode']) {
             $prefix = $this->config['table']['prefix'];
             $attr = $this->config['table']['attribute_name'];
 
@@ -95,15 +79,12 @@ class Schema
 
             $attrValue = $entry->getAttributes()->get($attr);
 
-            return ($prefix?$prefix:'').$attrValue;
+            return ($prefix ? $prefix : '').$attrValue;
         }
 
         return '__default';
     }
 
-    /**
-     * @return Dataset
-     */
     private function getOrCreateDataset(): Dataset
     {
         $dataset = $this->bigQueryClient->dataset($this->config['dataset']);
@@ -115,10 +96,6 @@ class Schema
         return $dataset;
     }
 
-    /**
-     * @param string $name
-     * @return Table
-     */
     private function getOrCreateTable(string $name): Table
     {
         $table = $this->getDataset()->table($name);

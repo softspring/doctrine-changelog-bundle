@@ -21,8 +21,6 @@ class ChangesPersistListener implements EventSubscriberInterface
 
     /**
      * ChangesPersistListener constructor.
-     * @param StorageDriverInterface $storageDriver
-     * @param ChangesStack $changesStack
      */
     public function __construct(StorageDriverInterface $storageDriver, ChangesStack $changesStack)
     {
@@ -34,7 +32,7 @@ class ChangesPersistListener implements EventSubscriberInterface
     {
         return [
             KernelEvents::TERMINATE => [
-                [ 'onTerminateStoreStack', 0 ]
+                ['onTerminateStoreStack', 0],
             ],
 
             // TODO also for KernelEvents::EXCEPTION

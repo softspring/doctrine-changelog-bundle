@@ -24,9 +24,6 @@ class BigQueryManager
 
     /**
      * BigQueryManager constructor.
-     * @param Schema $schema
-     * @param ChangesProcessor $changesProcessor
-     * @param LoggerInterface $logger
      */
     public function __construct(Schema $schema, ChangesProcessor $changesProcessor, LoggerInterface $logger)
     {
@@ -35,10 +32,6 @@ class BigQueryManager
         $this->logger = $logger;
     }
 
-    /**
-     * @param ChangeEntry $entry
-     * @return bool
-     */
     public function insertEntry(ChangeEntry $entry): bool
     {
         try {
@@ -60,8 +53,6 @@ class BigQueryManager
     }
 
     /**
-     * @param array $entries
-     * @return bool
      * @throws \Exception
      */
     public function insertEntries(array $entries): bool
@@ -80,7 +71,7 @@ class BigQueryManager
 
                 if (!$response->isSuccessful()) {
                     foreach ($response->info()['insertErrors'] as $insertError) {
-                        if (sizeof($insertError['errors']) == 1) {
+                        if (1 == sizeof($insertError['errors'])) {
                             $err = $insertError['errors'][0];
                             $this->logger->error(sprintf('BigQuery error inserting row, reason: %s location: %s, message: %s', $err['reason'], $err['location'], $err['message']));
                         } else {

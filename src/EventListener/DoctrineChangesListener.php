@@ -28,8 +28,6 @@ class DoctrineChangesListener implements EventSubscriber
 
     /**
      * DoctrineChangesListener constructor.
-     * @param EventDispatcherInterface $eventDispatcher
-     * @param AnnotationReader $metadataReader
      */
     public function __construct(EventDispatcherInterface $eventDispatcher, AnnotationReader $metadataReader)
     {
@@ -93,13 +91,6 @@ class DoctrineChangesListener implements EventSubscriber
         $colDeletions = $uow->getScheduledCollectionDeletions();
     }
 
-    /**
-     * @param object                 $entity
-     * @param UnitOfWork             $uow
-     * @param EntityManagerInterface $em
-     *
-     * @return array
-     */
     protected function getChanges(object $entity, UnitOfWork $uow, EntityManagerInterface $em): array
     {
         $metadata = $em->getClassMetadata(get_class($entity));

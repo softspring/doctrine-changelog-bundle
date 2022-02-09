@@ -16,7 +16,6 @@ class CollectUserListener implements EventSubscriberInterface
 
     /**
      * CollectUserListener constructor.
-     * @param TokenStorageInterface|null $tokenStorage
      */
     public function __construct(?TokenStorageInterface $tokenStorage)
     {
@@ -26,9 +25,9 @@ class CollectUserListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            SfsDoctrineChangeLogEvents::INSERTION => [ ['onChangeAddUsername', 98] ],
-            SfsDoctrineChangeLogEvents::UPDATE => [ ['onChangeAddUsername', 98] ],
-            SfsDoctrineChangeLogEvents::DELETION => [ ['onChangeAddUsername', 98] ],
+            SfsDoctrineChangeLogEvents::INSERTION => [['onChangeAddUsername', 98]],
+            SfsDoctrineChangeLogEvents::UPDATE => [['onChangeAddUsername', 98]],
+            SfsDoctrineChangeLogEvents::DELETION => [['onChangeAddUsername', 98]],
         ];
     }
 
@@ -38,7 +37,7 @@ class CollectUserListener implements EventSubscriberInterface
             return;
         }
 
-        if (! $token = $this->tokenStorage->getToken()) {
+        if (!$token = $this->tokenStorage->getToken()) {
             return;
         }
 

@@ -17,7 +17,6 @@ class CollectRequestListener implements EventSubscriberInterface
 
     /**
      * CollectRequestListener constructor.
-     * @param RequestStack $requestStack
      */
     public function __construct(RequestStack $requestStack)
     {
@@ -27,9 +26,9 @@ class CollectRequestListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            SfsDoctrineChangeLogEvents::INSERTION => [ ['onChangeAddRequest', 99] ],
-            SfsDoctrineChangeLogEvents::UPDATE => [ ['onChangeAddRequest', 99] ],
-            SfsDoctrineChangeLogEvents::DELETION => [ ['onChangeAddRequest', 99] ],
+            SfsDoctrineChangeLogEvents::INSERTION => [['onChangeAddRequest', 99]],
+            SfsDoctrineChangeLogEvents::UPDATE => [['onChangeAddRequest', 99]],
+            SfsDoctrineChangeLogEvents::DELETION => [['onChangeAddRequest', 99]],
         ];
     }
 

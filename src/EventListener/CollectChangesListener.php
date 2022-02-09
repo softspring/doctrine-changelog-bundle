@@ -4,9 +4,6 @@ namespace Softspring\DoctrineChangeLogBundle\EventListener;
 
 use Softspring\DoctrineChangeLogBundle\Collector\ChangesStack;
 use Softspring\DoctrineChangeLogBundle\Event\AbstractChangeEvent;
-use Softspring\DoctrineChangeLogBundle\Event\DeletionChangeEvent;
-use Softspring\DoctrineChangeLogBundle\Event\InsertionChangeEvent;
-use Softspring\DoctrineChangeLogBundle\Event\UpdateChangeEvent;
 use Softspring\DoctrineChangeLogBundle\SfsDoctrineChangeLogEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -19,7 +16,6 @@ class CollectChangesListener implements EventSubscriberInterface
 
     /**
      * CollectChangesListener constructor.
-     * @param ChangesStack $changesStack
      */
     public function __construct(ChangesStack $changesStack)
     {

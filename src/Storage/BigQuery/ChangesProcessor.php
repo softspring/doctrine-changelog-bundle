@@ -19,8 +19,6 @@ class ChangesProcessor
 
     /**
      * ChangesProcessor constructor.
-     * @param Schema $schema
-     * @param LoggerInterface $logger
      */
     public function __construct(Schema $schema, LoggerInterface $logger)
     {
@@ -28,10 +26,6 @@ class ChangesProcessor
         $this->logger = $logger;
     }
 
-    /**
-     * @param ChangeEntry $changes
-     * @return array
-     */
     public function getDataRow(ChangeEntry $changes): array
     {
         $data = [

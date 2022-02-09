@@ -15,7 +15,6 @@ class BigQueryStorageDriver implements StorageDriverInterface
 
     /**
      * BigQueryStorageDriver constructor.
-     * @param BigQueryManager $manager
      */
     public function __construct(BigQueryManager $manager)
     {

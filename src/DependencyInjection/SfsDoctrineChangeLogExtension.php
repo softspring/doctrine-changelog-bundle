@@ -17,7 +17,7 @@ class SfsDoctrineChangeLogExtension extends Extension
         $configuration = new Configuration();
         $config = $processor->processConfiguration($configuration, $configs);
 
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../../config/services'));
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../../config/services'));
 
         $loader->load('doctrine_changes_listener.yaml');
 
@@ -38,7 +38,7 @@ class SfsDoctrineChangeLogExtension extends Extension
 
     private function processBigQuery(array $config, ContainerBuilder $container)
     {
-        if ($config['storage']['driver'] != 'big-query') {
+        if ('big-query' != $config['storage']['driver']) {
             return;
         }
 
@@ -58,16 +58,16 @@ class SfsDoctrineChangeLogExtension extends Extension
 
         $bigQueryOptions['table']['mode'] = $config['storage']['big_query']['table']['mode'];
 
-        if ($bigQueryOptions['table']['mode'] == 'fixed') {
+        if ('fixed' == $bigQueryOptions['table']['mode']) {
             $bigQueryOptions['table']['name'] = $config['storage']['big_query']['table']['fixed']['name'];
         }
 
-        if ($bigQueryOptions['table']['mode'] == 'attribute') {
+        if ('attribute' == $bigQueryOptions['table']['mode']) {
             $bigQueryOptions['table']['prefix'] = $config['storage']['big_query']['table']['attribute']['prefix'];
             $bigQueryOptions['table']['attribute_name'] = $config['storage']['big_query']['table']['attribute']['attribute_name'];
         }
 
-        if ($bigQueryOptions['table']['mode'] == 'service') {
+        if ('service' == $bigQueryOptions['table']['mode']) {
             $bigQueryOptions['table']['service'] = $config['storage']['big_query']['table']['service'];
         }
 

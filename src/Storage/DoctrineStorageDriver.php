@@ -21,8 +21,6 @@ class DoctrineStorageDriver implements StorageDriverInterface
 
     /**
      * DoctrineStorageDriver constructor.
-     * @param EntityManagerInterface $em
-     * @param string $changeLogClass
      */
     public function __construct(EntityManagerInterface $em, string $changeLogClass = ChangeLog::class)
     {

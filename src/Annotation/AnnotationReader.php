@@ -13,6 +13,7 @@ class AnnotationReader
 
     /**
      * MetadataReader constructor.
+     *
      * @throws \Doctrine\Common\Annotations\AnnotationException
      */
     public function __construct()
@@ -20,10 +21,6 @@ class AnnotationReader
         $this->reader = new DoctrineAnnotationReader();
     }
 
-    /**
-     * @param object $entity
-     * @return bool
-     */
     public function isRegistrable(object $entity): bool
     {
         try {
@@ -34,7 +31,6 @@ class AnnotationReader
     }
 
     /**
-     * @param object $entity
      * @return string[]
      */
     public function getIgnoredFields(object $entity): array
