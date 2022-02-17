@@ -9,26 +9,17 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 class ChangesPersistListener implements EventSubscriberInterface
 {
-    /**
-     * @var StorageDriverInterface
-     */
-    protected $storageDriver;
+    protected StorageDriverInterface $storageDriver;
 
-    /**
-     * @var ChangesStack
-     */
-    protected $changesStack;
+    protected ChangesStack $changesStack;
 
-    /**
-     * ChangesPersistListener constructor.
-     */
     public function __construct(StorageDriverInterface $storageDriver, ChangesStack $changesStack)
     {
         $this->storageDriver = $storageDriver;
         $this->changesStack = $changesStack;
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             KernelEvents::TERMINATE => [

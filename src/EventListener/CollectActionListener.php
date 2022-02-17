@@ -10,7 +10,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class CollectActionListener implements EventSubscriberInterface
 {
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             SfsDoctrineChangeLogEvents::INSERTION => [
@@ -25,17 +25,17 @@ class CollectActionListener implements EventSubscriberInterface
         ];
     }
 
-    public function onInsertionAddAction(InsertionChangeEvent $event)
+    public function onInsertionAddAction(InsertionChangeEvent $event): void
     {
         $event->getEntry()->getAttributes()->set('action', 'insertion');
     }
 
-    public function onUpdateAddAction(UpdateChangeEvent $event)
+    public function onUpdateAddAction(UpdateChangeEvent $event): void
     {
         $event->getEntry()->getAttributes()->set('action', 'update');
     }
 
-    public function onDeletionAddAction(DeletionChangeEvent $event)
+    public function onDeletionAddAction(DeletionChangeEvent $event): void
     {
         $event->getEntry()->getAttributes()->set('action', 'deletion');
     }

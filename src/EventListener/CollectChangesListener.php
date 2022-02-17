@@ -9,20 +9,14 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class CollectChangesListener implements EventSubscriberInterface
 {
-    /**
-     * @var ChangesStack
-     */
-    protected $changesStack;
+    protected ChangesStack $changesStack;
 
-    /**
-     * CollectChangesListener constructor.
-     */
     public function __construct(ChangesStack $changesStack)
     {
         $this->changesStack = $changesStack;
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             SfsDoctrineChangeLogEvents::INSERTION => [
@@ -37,7 +31,7 @@ class CollectChangesListener implements EventSubscriberInterface
         ];
     }
 
-    public function onChangeCollectEvent(AbstractChangeEvent $event)
+    public function onChangeCollectEvent(AbstractChangeEvent $event): void
     {
         $this->changesStack->push($event->getEntry());
     }

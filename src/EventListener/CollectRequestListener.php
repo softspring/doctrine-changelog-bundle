@@ -10,20 +10,14 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class CollectRequestListener implements EventSubscriberInterface
 {
-    /**
-     * @var RequestStack
-     */
-    protected $requestStack;
+    protected RequestStack $requestStack;
 
-    /**
-     * CollectRequestListener constructor.
-     */
     public function __construct(RequestStack $requestStack)
     {
         $this->requestStack = $requestStack;
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             SfsDoctrineChangeLogEvents::INSERTION => [['onChangeAddRequest', 99]],
@@ -32,7 +26,7 @@ class CollectRequestListener implements EventSubscriberInterface
         ];
     }
 
-    public function onChangeAddRequest(AbstractChangeEvent $event)
+    public function onChangeAddRequest(AbstractChangeEvent $event): void
     {
         $request = $this->requestStack->getCurrentRequest();
 

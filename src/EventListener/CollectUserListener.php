@@ -9,20 +9,14 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class CollectUserListener implements EventSubscriberInterface
 {
-    /**
-     * @var TokenStorageInterface|null
-     */
-    protected $tokenStorage;
+    protected ?TokenStorageInterface $tokenStorage;
 
-    /**
-     * CollectUserListener constructor.
-     */
     public function __construct(?TokenStorageInterface $tokenStorage)
     {
         $this->tokenStorage = $tokenStorage;
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             SfsDoctrineChangeLogEvents::INSERTION => [['onChangeAddUsername', 98]],
@@ -31,7 +25,7 @@ class CollectUserListener implements EventSubscriberInterface
         ];
     }
 
-    public function onChangeAddUsername(AbstractChangeEvent $event)
+    public function onChangeAddUsername(AbstractChangeEvent $event): void
     {
         if (!$this->tokenStorage instanceof TokenStorageInterface) {
             return;
