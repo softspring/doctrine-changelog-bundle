@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
 class SfsDoctrineChangeLogExtension extends Extension
 {
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $processor = new Processor();
         $configuration = new Configuration();
@@ -36,7 +36,7 @@ class SfsDoctrineChangeLogExtension extends Extension
         }
     }
 
-    private function processBigQuery(array $config, ContainerBuilder $container)
+    private function processBigQuery(array $config, ContainerBuilder $container): void
     {
         if ('big-query' != $config['storage']['driver']) {
             return;

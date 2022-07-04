@@ -6,16 +6,8 @@ use Doctrine\Common\Annotations\AnnotationReader as DoctrineAnnotationReader;
 
 class AnnotationReader
 {
-    /**
-     * @var DoctrineAnnotationReader
-     */
-    protected $reader;
+    protected DoctrineAnnotationReader $reader;
 
-    /**
-     * MetadataReader constructor.
-     *
-     * @throws \Doctrine\Common\Annotations\AnnotationException
-     */
     public function __construct()
     {
         $this->reader = new DoctrineAnnotationReader();

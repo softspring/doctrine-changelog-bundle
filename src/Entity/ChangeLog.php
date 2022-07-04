@@ -14,72 +14,61 @@ use Softspring\DoctrineChangeLogBundle\Collector\ChangeEntry;
 class ChangeLog
 {
     /**
-     * @var int
      * @ORM\Id()
      * @ORM\Column(name="id", type="bigint", options={"unsigned":true})
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    protected ?int $id = null;
 
     /**
-     * @var int
      * @ORM\Column(name="timestamp", type="integer", options={"unsigned":true})
      */
-    protected $timestamp;
+    protected ?int $timestamp = null;
 
     /**
-     * @var string|null
      * @ORM\Column(name="username", type="string", nullable=true)
      */
-    protected $username;
+    protected ?string $username = null;
 
     /**
-     * @var string|null
      * @ORM\Column(name="request_ip", type="string", nullable=true)
      */
-    protected $ip;
+    protected ?string $ip = null;
 
     /**
-     * @var string|null
      * @ORM\Column(name="user_agent", type="string", nullable=true)
      */
-    protected $userAgent;
+    protected ?string $userAgent = null;
 
     /**
-     * @var string|null
      * @ORM\Column(name="request_method", type="string", nullable=true)
      */
-    protected $requestMethod;
+    protected ?string $requestMethod = null;
 
     /**
-     * @var string|null
      * @ORM\Column(name="request_path", type="string", nullable=true)
      */
-    protected $requestPath;
+    protected ?string $requestPath = null;
 
     /**
-     * @var string|null
      * @ORM\Column(name="entity_class", type="string", nullable=false)
      */
-    protected $entityClass;
+    protected ?string $entityClass = null;
 
     /**
-     * @var array|null
      * @ORM\Column(name="entity_id", type="json_array", nullable=false)
      */
-    protected $entityId;
+    protected ?array $entityId = null;
 
     /**
-     * @var string|null
      * @ORM\Column(name="action", type="string", nullable=true)
      */
-    protected $action;
+    protected ?string $action = null;
 
     /**
-     * @var array
      * @ORM\Column(name="changes", type="json_array", nullable=false)
      */
-    protected $changes;
+    protected ?array $changes = null;
 
     /**
      * @return ChangeLog

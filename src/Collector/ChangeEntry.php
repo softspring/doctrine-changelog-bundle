@@ -6,34 +6,16 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 
 class ChangeEntry
 {
-    /**
-     * @var int
-     */
-    protected $timestamp;
+    protected int $timestamp;
 
-    /**
-     * @var string
-     */
-    protected $entityClass;
+    protected string $entityClass;
 
-    /**
-     * @var array
-     */
-    protected $entityIdentifier;
+    protected array $entityIdentifier;
 
-    /**
-     * @var array
-     */
-    protected $changes = [];
+    protected array $changes = [];
 
-    /**
-     * @var ParameterBag
-     */
-    protected $attributes;
+    protected ParameterBag $attributes;
 
-    /**
-     * ChangeLog constructor.
-     */
     public function __construct(array $entityIdentifier, string $entityClass, array $changes, array $attributes = [])
     {
         $this->timestamp = time();

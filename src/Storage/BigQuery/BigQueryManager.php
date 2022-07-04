@@ -7,24 +7,12 @@ use Softspring\DoctrineChangeLogBundle\Collector\ChangeEntry;
 
 class BigQueryManager
 {
-    /**
-     * @var Schema
-     */
-    protected $schema;
+    protected Schema $schema;
 
-    /**
-     * @var ChangesProcessor
-     */
-    protected $changesProcessor;
+    protected ChangesProcessor $changesProcessor;
 
-    /**
-     * @var LoggerInterface
-     */
-    protected $logger;
+    protected LoggerInterface $logger;
 
-    /**
-     * BigQueryManager constructor.
-     */
     public function __construct(Schema $schema, ChangesProcessor $changesProcessor, LoggerInterface $logger)
     {
         $this->schema = $schema;

@@ -16,33 +16,24 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class DoctrineChangesListener implements EventSubscriber
 {
-    /**
-     * @var EventDispatcherInterface
-     */
-    protected $eventDispatcher;
+    protected EventDispatcherInterface $eventDispatcher;
 
-    /**
-     * @var AnnotationReader
-     */
-    protected $metadataReader;
+    protected AnnotationReader $metadataReader;
 
-    /**
-     * DoctrineChangesListener constructor.
-     */
     public function __construct(EventDispatcherInterface $eventDispatcher, AnnotationReader $metadataReader)
     {
         $this->eventDispatcher = $eventDispatcher;
         $this->metadataReader = $metadataReader;
     }
 
-    public function getSubscribedEvents()
+    public function getSubscribedEvents(): array
     {
         return [
             Events::onFlush,
         ];
     }
 
-    public function onFlush(OnFlushEventArgs $event)
+    public function onFlush(OnFlushEventArgs $event): void
     {
         $em = $event->getEntityManager();
         $uow = $em->getUnitOfWork();

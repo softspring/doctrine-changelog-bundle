@@ -10,20 +10,11 @@ use Softspring\DoctrineChangeLogBundle\Collector\ChangeEntry;
 
 class Schema
 {
-    /**
-     * @var BigQueryClient
-     */
-    protected $bigQueryClient;
+    protected BigQueryClient $bigQueryClient;
 
-    /**
-     * @var array
-     */
-    protected $config;
+    protected array $config;
 
-    /**
-     * @var LoggerInterface
-     */
-    protected $logger;
+    protected LoggerInterface $logger;
 
     /**
      * Schema constructor.

@@ -8,14 +8,8 @@ use Softspring\DoctrineChangeLogBundle\Storage\BigQuery\BigQueryManager;
 
 class BigQueryStorageDriver implements StorageDriverInterface
 {
-    /**
-     * @var BigQueryManager
-     */
-    protected $manager;
+    protected BigQueryManager $manager;
 
-    /**
-     * BigQueryStorageDriver constructor.
-     */
     public function __construct(BigQueryManager $manager)
     {
         $this->manager = $manager;

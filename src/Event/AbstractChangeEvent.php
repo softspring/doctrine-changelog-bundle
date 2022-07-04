@@ -7,24 +7,12 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 abstract class AbstractChangeEvent extends Event
 {
-    /**
-     * @var array
-     */
-    protected $identifier;
+    protected array $identifier;
 
-    /**
-     * @var object
-     */
-    protected $entity;
+    protected object $entity;
 
-    /**
-     * @var ChangeEntry
-     */
-    protected $entry;
+    protected ChangeEntry $entry;
 
-    /**
-     * AbstractChangeEvent constructor.
-     */
     public function __construct(array $identifier, object $entity, array $changes)
     {
         $this->identifier = $identifier;

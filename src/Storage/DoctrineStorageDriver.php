@@ -9,19 +9,10 @@ use Softspring\DoctrineChangeLogBundle\Entity\ChangeLog;
 
 class DoctrineStorageDriver implements StorageDriverInterface
 {
-    /**
-     * @var EntityManagerInterface
-     */
-    protected $em;
+    protected EntityManagerInterface $em;
 
-    /**
-     * @var string
-     */
-    protected $changeLogClass;
+    protected string $changeLogClass;
 
-    /**
-     * DoctrineStorageDriver constructor.
-     */
     public function __construct(EntityManagerInterface $em, string $changeLogClass = ChangeLog::class)
     {
         $this->em = $em;

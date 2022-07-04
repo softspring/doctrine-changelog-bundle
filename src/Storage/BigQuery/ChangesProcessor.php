@@ -7,19 +7,10 @@ use Softspring\DoctrineChangeLogBundle\Collector\ChangeEntry;
 
 class ChangesProcessor
 {
-    /**
-     * @var Schema
-     */
-    protected $schema;
+    protected Schema $schema;
 
-    /**
-     * @var LoggerInterface
-     */
-    protected $logger;
+    protected LoggerInterface $logger;
 
-    /**
-     * ChangesProcessor constructor.
-     */
     public function __construct(Schema $schema, LoggerInterface $logger)
     {
         $this->schema = $schema;
