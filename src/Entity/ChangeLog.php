@@ -75,7 +75,7 @@ class ChangeLog
      */
     public static function create(ChangeEntry $entry)
     {
-        $changeLog = new static();
+        $changeLog = new self();
 
         // set basic data
         $changeLog->setTimestamp($entry->getTimestamp());

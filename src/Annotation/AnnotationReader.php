@@ -22,9 +22,6 @@ class AnnotationReader
         }
     }
 
-    /**
-     * @return string[]
-     */
     public function getIgnoredFields(object $entity): array
     {
         try {
