@@ -27,6 +27,7 @@
             "Softspring\\DoctrineChangeLogBundle\\": "src/"
         }
     },
-    "extra": {
+    "config": {
+        "sort-packages": true
     }
 }
