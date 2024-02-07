@@ -3,7 +3,9 @@
 namespace Softspring\DoctrineChangeLogBundle\EventListener;
 
 use Softspring\DoctrineChangeLogBundle\Event\AbstractChangeEvent;
-use Softspring\DoctrineChangeLogBundle\SfsDoctrineChangeLogEvents;
+use Softspring\DoctrineChangeLogBundle\Event\DeletionChangeEvent;
+use Softspring\DoctrineChangeLogBundle\Event\InsertionChangeEvent;
+use Softspring\DoctrineChangeLogBundle\Event\UpdateChangeEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -20,9 +22,9 @@ class CollectRequestListener implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            SfsDoctrineChangeLogEvents::INSERTION => [['onChangeAddRequest', 99]],
-            SfsDoctrineChangeLogEvents::UPDATE => [['onChangeAddRequest', 99]],
-            SfsDoctrineChangeLogEvents::DELETION => [['onChangeAddRequest', 99]],
+            InsertionChangeEvent::class => [['onChangeAddRequest', 99]],
+            UpdateChangeEvent::class => [['onChangeAddRequest', 99]],
+            DeletionChangeEvent::class => [['onChangeAddRequest', 99]],
         ];
     }
 

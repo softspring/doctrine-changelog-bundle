@@ -3,7 +3,9 @@
 namespace Softspring\DoctrineChangeLogBundle\EventListener;
 
 use Softspring\DoctrineChangeLogBundle\Event\AbstractChangeEvent;
-use Softspring\DoctrineChangeLogBundle\SfsDoctrineChangeLogEvents;
+use Softspring\DoctrineChangeLogBundle\Event\DeletionChangeEvent;
+use Softspring\DoctrineChangeLogBundle\Event\InsertionChangeEvent;
+use Softspring\DoctrineChangeLogBundle\Event\UpdateChangeEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
@@ -19,9 +21,9 @@ class CollectUserListener implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            SfsDoctrineChangeLogEvents::INSERTION => [['onChangeAddUsername', 98]],
-            SfsDoctrineChangeLogEvents::UPDATE => [['onChangeAddUsername', 98]],
-            SfsDoctrineChangeLogEvents::DELETION => [['onChangeAddUsername', 98]],
+            InsertionChangeEvent::class => [['onChangeAddUsername', 98]],
+            UpdateChangeEvent::class => [['onChangeAddUsername', 98]],
+            DeletionChangeEvent::class => [['onChangeAddUsername', 98]],
         ];
     }
 

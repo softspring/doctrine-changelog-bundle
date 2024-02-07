@@ -11,6 +11,9 @@ use Softspring\DoctrineChangeLogBundle\Collector\ChangeEntry;
  *      @ORM\Index(name="timestamp_idx", columns={"timestamp"})
  * })
  */
+#[ORM\MappedSuperclass]
+#[ORM\Table(name: 'change_log')]
+#[ORM\Index(columns: ['timestamp'], name: 'timestamp_idx')]
 class ChangeLog
 {
     /**
@@ -18,62 +21,72 @@ class ChangeLog
      * @ORM\Column(name="id", type="bigint", options={"unsigned":true})
      * @ORM\GeneratedValue(strategy="AUTO")
      */
+    #[ORM\Id]
+    #[ORM\Column(name: 'id', type: 'bigint', options: ['unsigned' => true])]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     protected ?int $id = null;
 
     /**
      * @ORM\Column(name="timestamp", type="integer", options={"unsigned":true})
      */
+    #[ORM\Column(name: 'timestamp', type: 'integer', options: ['unsigned' => true])]
     protected ?int $timestamp = null;
 
     /**
      * @ORM\Column(name="username", type="string", nullable=true)
      */
+    #[ORM\Column(name: 'username', type: 'string', nullable: true)]
     protected ?string $username = null;
 
     /**
      * @ORM\Column(name="request_ip", type="string", nullable=true)
      */
+    #[ORM\Column(name: 'request_ip', type: 'string', nullable: true)]
     protected ?string $ip = null;
 
     /**
      * @ORM\Column(name="user_agent", type="string", nullable=true)
      */
+    #[ORM\Column(name: 'user_agent', type: 'string', nullable: true)]
     protected ?string $userAgent = null;
 
     /**
      * @ORM\Column(name="request_method", type="string", nullable=true)
      */
+    #[ORM\Column(name: 'request_method', type: 'string', nullable: true)]
     protected ?string $requestMethod = null;
 
     /**
      * @ORM\Column(name="request_path", type="string", nullable=true)
      */
+    #[ORM\Column(name: 'request_path', type: 'string', nullable: true)]
     protected ?string $requestPath = null;
 
     /**
      * @ORM\Column(name="entity_class", type="string", nullable=false)
      */
+    #[ORM\Column(name: 'entity_class', type: 'string', nullable: false)]
     protected ?string $entityClass = null;
 
     /**
      * @ORM\Column(name="entity_id", type="json_array", nullable=false)
      */
+    #[ORM\Column(name: 'entity_id', type: 'json_array', nullable: false)]
     protected ?array $entityId = null;
 
     /**
      * @ORM\Column(name="action", type="string", nullable=true)
      */
+    #[ORM\Column(name: 'action', type: 'string', nullable: true)]
     protected ?string $action = null;
 
     /**
      * @ORM\Column(name="changes", type="json_array", nullable=false)
      */
+    #[ORM\Column(name: 'changes', type: 'json_array', nullable: false)]
     protected ?array $changes = null;
 
-    /**
-     * @return ChangeLog
-     */
-    public static function create(ChangeEntry $entry)
+    public static function create(ChangeEntry $entry): ChangeLog
     {
         $changeLog = new self();
 

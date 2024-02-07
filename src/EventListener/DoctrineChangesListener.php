@@ -4,6 +4,7 @@ namespace Softspring\DoctrineChangeLogBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 use Doctrine\ORM\Events;
 use Doctrine\ORM\UnitOfWork;
@@ -11,7 +12,6 @@ use Softspring\DoctrineChangeLogBundle\Annotation\AnnotationReader;
 use Softspring\DoctrineChangeLogBundle\Event\DeletionChangeEvent;
 use Softspring\DoctrineChangeLogBundle\Event\InsertionChangeEvent;
 use Softspring\DoctrineChangeLogBundle\Event\UpdateChangeEvent;
-use Softspring\DoctrineChangeLogBundle\SfsDoctrineChangeLogEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class DoctrineChangesListener implements EventSubscriber
@@ -33,9 +33,12 @@ class DoctrineChangesListener implements EventSubscriber
         ];
     }
 
+    /**
+     * @throws EntityNotFoundException
+     */
     public function onFlush(OnFlushEventArgs $event): void
     {
-        $em = $event->getEntityManager();
+        $em = $event->getObjectManager();
         $uow = $em->getUnitOfWork();
 
         foreach ($uow->getScheduledEntityInsertions() as $entityId => $entity) {
@@ -47,8 +50,7 @@ class DoctrineChangesListener implements EventSubscriber
                 continue;
             }
 
-            $event = new InsertionChangeEvent($uow->getEntityIdentifier($entity), $entity, $changes);
-            $this->eventDispatcher->dispatch($event, SfsDoctrineChangeLogEvents::INSERTION);
+            $this->eventDispatcher->dispatch(new InsertionChangeEvent($uow->getEntityIdentifier($entity), $entity, $changes));
         }
 
         foreach ($uow->getScheduledEntityUpdates() as $entityId => $entity) {
@@ -60,8 +62,7 @@ class DoctrineChangesListener implements EventSubscriber
                 continue;
             }
 
-            $event = new UpdateChangeEvent($uow->getEntityIdentifier($entity), $entity, $changes);
-            $this->eventDispatcher->dispatch($event, SfsDoctrineChangeLogEvents::UPDATE);
+            $this->eventDispatcher->dispatch(new UpdateChangeEvent($uow->getEntityIdentifier($entity), $entity, $changes));
         }
 
         foreach ($uow->getScheduledEntityDeletions() as $entityId => $entity) {
@@ -73,8 +74,7 @@ class DoctrineChangesListener implements EventSubscriber
                 continue;
             }
 
-            $event = new DeletionChangeEvent($uow->getEntityIdentifier($entity), $entity, $changes);
-            $this->eventDispatcher->dispatch($event, SfsDoctrineChangeLogEvents::DELETION);
+            $this->eventDispatcher->dispatch(new DeletionChangeEvent($uow->getEntityIdentifier($entity), $entity, $changes));
         }
 
         // TODO process collections

@@ -2,13 +2,11 @@
 
 namespace Softspring\DoctrineChangeLogBundle\Annotation;
 
-use Doctrine\Common\Annotations\Annotation;
+use Softspring\DoctrineChangeLogBundle\Mapping\Ignored as IgnoredMapping;
 
 /**
- * @Annotation
- *
- * @Target("PROPERTY")
+ * @deprecated since version 5.2, to be removed in 6.0. Use Softspring\DoctrineChangeLogBundle\Mapping\Ignored instead.
  */
-final class Ignored extends Annotation
+class Ignored extends IgnoredMapping
 {
 }

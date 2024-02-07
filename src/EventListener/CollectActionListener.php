@@ -5,7 +5,6 @@ namespace Softspring\DoctrineChangeLogBundle\EventListener;
 use Softspring\DoctrineChangeLogBundle\Event\DeletionChangeEvent;
 use Softspring\DoctrineChangeLogBundle\Event\InsertionChangeEvent;
 use Softspring\DoctrineChangeLogBundle\Event\UpdateChangeEvent;
-use Softspring\DoctrineChangeLogBundle\SfsDoctrineChangeLogEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class CollectActionListener implements EventSubscriberInterface
@@ -13,13 +12,13 @@ class CollectActionListener implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            SfsDoctrineChangeLogEvents::INSERTION => [
+            InsertionChangeEvent::class => [
                 ['onInsertionAddAction', 100],
             ],
-            SfsDoctrineChangeLogEvents::UPDATE => [
+            UpdateChangeEvent::class => [
                 ['onUpdateAddAction', 100],
             ],
-            SfsDoctrineChangeLogEvents::DELETION => [
+            DeletionChangeEvent::class => [
                 ['onDeletionAddAction', 100],
             ],
         ];
