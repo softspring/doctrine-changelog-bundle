@@ -38,7 +38,7 @@ class DoctrineChangesListener implements EventSubscriber
      */
     public function onFlush(OnFlushEventArgs $event): void
     {
-        $em = $event->getObjectManager();
+        $em = $event->getEntityManager();
         $uow = $em->getUnitOfWork();
 
         foreach ($uow->getScheduledEntityInsertions() as $entityId => $entity) {
