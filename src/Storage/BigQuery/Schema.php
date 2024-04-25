@@ -2,6 +2,7 @@
 
 namespace Softspring\DoctrineChangeLogBundle\Storage\BigQuery;
 
+use Exception;
 use Google\Cloud\BigQuery\BigQueryClient;
 use Google\Cloud\BigQuery\Dataset;
 use Google\Cloud\BigQuery\Table;
@@ -48,7 +49,7 @@ class Schema
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function getTargetTable(ChangeEntry $entry): string
     {
@@ -57,7 +58,7 @@ class Schema
         }
 
         if ('service' == $this->config['table']['mode']) {
-            throw new \Exception('Table mode by service is not yet implemented');
+            throw new Exception('Table mode by service is not yet implemented');
         }
 
         if ('attribute' == $this->config['table']['mode']) {

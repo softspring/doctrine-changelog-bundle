@@ -3,6 +3,8 @@
 namespace Softspring\DoctrineChangeLogBundle\Annotation;
 
 use Doctrine\Common\Annotations\AnnotationReader as DoctrineAnnotationReader;
+use ReflectionClass;
+use ReflectionException;
 
 class AnnotationReader
 {
@@ -16,8 +18,8 @@ class AnnotationReader
     public function isRegistrable(object $entity): bool
     {
         try {
-            return (bool) $this->reader->getClassAnnotation(new \ReflectionClass(get_class($entity)), Registrable::class);
-        } catch (\ReflectionException $e) {
+            return (bool) $this->reader->getClassAnnotation(new ReflectionClass(get_class($entity)), Registrable::class);
+        } catch (ReflectionException $e) {
             return false;
         }
     }
@@ -25,7 +27,7 @@ class AnnotationReader
     public function getIgnoredFields(object $entity): array
     {
         try {
-            $reflection = new \ReflectionClass(get_class($entity));
+            $reflection = new ReflectionClass(get_class($entity));
 
             $ignoredFields = [];
 
@@ -38,7 +40,7 @@ class AnnotationReader
             }
 
             return $ignoredFields;
-        } catch (\ReflectionException $e) {
+        } catch (ReflectionException $e) {
             return [];
         }
     }

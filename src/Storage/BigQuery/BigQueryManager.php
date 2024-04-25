@@ -2,6 +2,7 @@
 
 namespace Softspring\DoctrineChangeLogBundle\Storage\BigQuery;
 
+use Exception;
 use Psr\Log\LoggerInterface;
 use Softspring\DoctrineChangeLogBundle\Collector\ChangeEntry;
 
@@ -32,7 +33,7 @@ class BigQueryManager
                 // TODO LOG ERRORS
                 return false;
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             // TODO PROCESS EXCEPTION
             return false;
         }
@@ -41,7 +42,7 @@ class BigQueryManager
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function insertEntries(array $entries): bool
     {
@@ -68,7 +69,7 @@ class BigQueryManager
                     }
                     $successful = false;
                 }
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $this->logger->error($e->getMessage());
                 $successful = false;
             }

@@ -2,17 +2,6 @@
 
 namespace Softspring\DoctrineChangeLogBundle\Command;
 
-use Google\Cloud\BigQuery\BigQueryClient;
-use Google\Cloud\BigQuery\Dataset;
-use Google\Cloud\BigQuery\Table;
-use Google\Cloud\Core\Exception\ConflictException;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Exception\InvalidArgumentException;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-
 class BigQueryCreateStructureCommand // extends Command implements ContainerAwareInterface
 {
     //    /**

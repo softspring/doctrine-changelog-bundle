@@ -2,7 +2,9 @@
 
 namespace Softspring\DoctrineChangeLogBundle\Collector;
 
-class ChangesStack implements \Countable
+use Countable;
+
+class ChangesStack implements Countable
 {
     /**
      * @var ChangeEntry[]
