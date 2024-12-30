@@ -16,7 +16,7 @@
         "symfony/security-core": "^5.4|^6.0|^7.0"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "3.64.*",
+        "friendsofphp/php-cs-fixer": "3.66.*",
         "google/cloud-bigquery": "^1.0",
         "phpstan/phpstan": "^1.10",
         "rector/rector": "^1.0"
