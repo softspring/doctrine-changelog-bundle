@@ -2,7 +2,7 @@
     "name": "softspring/doctrine-changelog-bundle",
     "description": "Doctrine changelog collect and store into warehouse",
     "type": "symfony-bundle",
-    "license": "AGPL-3.0",
+    "license": "AGPL-3.0-or-later",
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
