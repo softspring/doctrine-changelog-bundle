@@ -1,48 +1,53 @@
 {
     "name": "softspring/doctrine-changelog-bundle",
     "description": "Doctrine changelog collect and store into warehouse",
-    "type": "symfony-bundle",
     "license": "AGPL-3.0-or-later",
-    "minimum-stability": "dev",
-    "prefer-stable": true,
+    "type": "symfony-bundle",
     "require": {
         "php": ">=8.4",
-        "doctrine/orm": "^2.11 | ^3.0",
         "doctrine/annotations": "^1.11",
-        "symfony/config": "^6.4|^7.4|^8.0",
-        "symfony/dependency-injection": "^6.4|^7.4|^8.0",
-        "symfony/http-foundation": "^6.4|^7.4|^8.0",
-        "symfony/http-kernel": "^6.4|^7.4|^8.0",
-        "symfony/security-core": "^6.4|^7.4|^8.0"
+        "doctrine/orm": "^2.10 || ^3.0 || ^4.0",
+        "symfony/config": "^6.4 || ^7.4 || ^8.0",
+        "symfony/dependency-injection": "^6.4 || ^7.4 || ^8.0",
+        "symfony/http-foundation": "^6.4 || ^7.4 || ^8.0",
+        "symfony/http-kernel": "^6.4 || ^7.4 || ^8.0",
+        "symfony/security-core": "^6.4 || ^7.4 || ^8.0"
     },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.50",
-        "friendsofphp/php-cs-fixer": "^3.89",
+        "friendsofphp/php-cs-fixer": "^3.94",
         "google/cloud-bigquery": "^1.0",
         "phpstan/phpstan": "^2.1",
-        "rector/rector": "^2.2"
+        "rector/rector": "^2.3"
     },
     "suggest": {
         "google/cloud-bigquery": "^1.0"
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Softspring\\DoctrineChangeLogBundle\\": "src/"
         }
     },
     "config": {
-        "sort-packages": true,
         "allow-plugins": {
             "ergebnis/composer-normalize": true
+        },
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-6.0": "6.0.x-dev"
         }
     },
     "scripts": {
         "fix": [
             "vendor/bin/rector process src tests",
-            "vendor/bin/php-cs-fixer fix --diff",
+            "vendor/bin/php-cs-fixer fix",
             "composer normalize"
         ],
-        "run-tests" : [
+        "run-tests": [
             "composer validate --strict --no-check-lock --ansi",
             "XDEBUG_MODE=coverage vendor/bin/phpunit",
             "vendor/bin/rector process src tests --dry-run",
