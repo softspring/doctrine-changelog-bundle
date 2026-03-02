@@ -60,11 +60,11 @@ class BigQueryManager
 
                 if (!$response->isSuccessful()) {
                     foreach ($response->info()['insertErrors'] as $insertError) {
-                        if (1 == sizeof($insertError['errors'])) {
+                        if (1 === count($insertError['errors'])) {
                             $err = $insertError['errors'][0];
                             $this->logger->error(sprintf('BigQuery error inserting row, reason: %s location: %s, message: %s', $err['reason'], $err['location'], $err['message']));
                         } else {
-                            $this->logger->error(sprintf('BigQuery error inserting row because of multiple errors'));
+                            $this->logger->error('BigQuery error inserting row because of multiple errors');
                         }
                     }
                     $successful = false;

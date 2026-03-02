@@ -41,36 +41,36 @@ class DoctrineChangesListener implements EventSubscriber
         $em = $event->getEntityManager();
         $uow = $em->getUnitOfWork();
 
-        foreach ($uow->getScheduledEntityInsertions() as $entityId => $entity) {
+        foreach ($uow->getScheduledEntityInsertions() as $entity) {
             if (!$this->metadataReader->isRegistrable($entity)) {
                 continue;
             }
 
-            if (empty($changes = $this->getChanges($entity, $uow, $em))) {
+            if (($changes = $this->getChanges($entity, $uow, $em)) === []) {
                 continue;
             }
 
             $this->eventDispatcher->dispatch(new InsertionChangeEvent($uow->getEntityIdentifier($entity), $entity, $changes));
         }
 
-        foreach ($uow->getScheduledEntityUpdates() as $entityId => $entity) {
+        foreach ($uow->getScheduledEntityUpdates() as $entity) {
             if (!$this->metadataReader->isRegistrable($entity)) {
                 continue;
             }
 
-            if (empty($changes = $this->getChanges($entity, $uow, $em))) {
+            if (($changes = $this->getChanges($entity, $uow, $em)) === []) {
                 continue;
             }
 
             $this->eventDispatcher->dispatch(new UpdateChangeEvent($uow->getEntityIdentifier($entity), $entity, $changes));
         }
 
-        foreach ($uow->getScheduledEntityDeletions() as $entityId => $entity) {
+        foreach ($uow->getScheduledEntityDeletions() as $entity) {
             if (!$this->metadataReader->isRegistrable($entity)) {
                 continue;
             }
 
-            if (empty($changes = $this->getChanges($entity, $uow, $em))) {
+            if (($changes = $this->getChanges($entity, $uow, $em)) === []) {
                 continue;
             }
 
@@ -78,8 +78,8 @@ class DoctrineChangesListener implements EventSubscriber
         }
 
         // TODO process collections
-        $colUpdates = $uow->getScheduledCollectionUpdates();
-        $colDeletions = $uow->getScheduledCollectionDeletions();
+        $uow->getScheduledCollectionUpdates();
+        $uow->getScheduledCollectionDeletions();
     }
 
     protected function getChanges(object $entity, UnitOfWork $uow, EntityManagerInterface $em): array

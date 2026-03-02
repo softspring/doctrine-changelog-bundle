@@ -8,6 +8,7 @@ use Softspring\DoctrineChangeLogBundle\Event\InsertionChangeEvent;
 use Softspring\DoctrineChangeLogBundle\Event\UpdateChangeEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class CollectUserListener implements EventSubscriberInterface
 {
@@ -33,7 +34,7 @@ class CollectUserListener implements EventSubscriberInterface
             return;
         }
 
-        if (!$token = $this->tokenStorage->getToken()) {
+        if (!($token = $this->tokenStorage->getToken()) instanceof TokenInterface) {
             return;
         }
 

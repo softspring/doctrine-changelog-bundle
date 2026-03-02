@@ -95,9 +95,8 @@ class Schema
         if (!$table->exists()) {
             $this->logger->info(sprintf('BigQuery table %s does not exists', $name));
             $table = $this->getDataset()->createTable($name, ['schema' => $this->config['schema']]);
-        } else {
-            // TODO TEST IF UPDATE IS NEEDED
         }
+        // TODO TEST IF UPDATE IS NEEDED
 
         return $table;
     }

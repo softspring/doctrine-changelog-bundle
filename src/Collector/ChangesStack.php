@@ -9,16 +9,11 @@ class ChangesStack implements Countable
     /**
      * @var ChangeEntry[]
      */
-    protected array $entries;
-
-    public function __construct()
-    {
-        $this->entries = [];
-    }
+    protected array $entries = [];
 
     public function count(): int
     {
-        return sizeof($this->entries);
+        return count($this->entries);
     }
 
     public function push(ChangeEntry $entry): void
