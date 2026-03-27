@@ -31,3 +31,4 @@ See [SECURITY.md](SECURITY.md).
 ## License
 
 This package is free and released under the [AGPL-3.0 license](LICENSE).
+
