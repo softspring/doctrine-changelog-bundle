@@ -3,7 +3,6 @@
 namespace Softspring\DoctrineChangeLogBundle\Mapping;
 
 use Attribute;
-use Doctrine\Common\Annotations\Annotation;
 
 /**
  * @Annotation
@@ -11,6 +10,10 @@ use Doctrine\Common\Annotations\Annotation;
  * @Target("CLASS")
  */
 #[Attribute(Attribute::TARGET_CLASS)]
-/* final */ class Registrable extends Annotation
+/* final */ class Registrable
 {
+    public function __construct(
+        public readonly array $values = [],
+    ) {
+    }
 }

@@ -5,6 +5,8 @@ namespace Softspring\DoctrineChangeLogBundle\Annotation;
 use Doctrine\Common\Annotations\AnnotationReader as DoctrineAnnotationReader;
 use ReflectionClass;
 use ReflectionException;
+use Softspring\DoctrineChangeLogBundle\Mapping\Ignored as IgnoredMapping;
+use Softspring\DoctrineChangeLogBundle\Mapping\Registrable as RegistrableMapping;
 
 class AnnotationReader
 {
@@ -18,7 +20,13 @@ class AnnotationReader
     public function isRegistrable(object $entity): bool
     {
         try {
-            return (bool) $this->reader->getClassAnnotation(new ReflectionClass(get_class($entity)), Registrable::class);
+            $reflection = new ReflectionClass($entity);
+
+            if ([] !== $reflection->getAttributes(RegistrableMapping::class)) {
+                return true;
+            }
+
+            return (bool) $this->reader->getClassAnnotation($reflection, RegistrableMapping::class);
         } catch (ReflectionException $e) {
             return false;
         }
@@ -32,7 +40,7 @@ class AnnotationReader
             $ignoredFields = [];
 
             foreach ($reflection->getProperties() as $property) {
-                if (!$this->reader->getPropertyAnnotation($property, Ignored::class)) {
+                if ([] === $property->getAttributes(IgnoredMapping::class) && !$this->reader->getPropertyAnnotation($property, IgnoredMapping::class)) {
                     continue;
                 }
 

@@ -21,7 +21,7 @@ class DoctrineStorageDriver implements StorageDriverInterface
 
     public function save(ChangeEntry $entry): void
     {
-        $this->em->persist(ChangeLog::create($entry));
+        $this->em->persist(call_user_func([$this->changeLogClass, 'create'], $entry));
         $this->em->flush();
     }
 

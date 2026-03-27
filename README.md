@@ -1,13 +1,14 @@
-# Doctrine Changelog Bundle
+# Doctrine Changelog Component
 
-![Latest Stable](https://img.shields.io/packagist/v/softspring/doctrine-changelog-bundle?label=stable&style=flat-square)
-![Latest Unstable](https://img.shields.io/packagist/v/softspring/doctrine-changelog-bundle?label=unstable&style=flat-square&include_prereleases)
-![License](https://img.shields.io/packagist/l/softspring/doctrine-changelog-bundle?style=flat-square)
-![PHP Version](https://img.shields.io/packagist/dependency-v/softspring/doctrine-changelog-bundle/php?style=flat-square)
-![Downloads](https://img.shields.io/packagist/dt/softspring/doctrine-changelog-bundle?style=flat-square)
+[![Latest Stable](https://img.shields.io/packagist/v/softspring/doctrine-changelog-bundle?label=stable&style=flat-square)](https://packagist.org/packages/softspring/doctrine-changelog-bundle)
+[![Latest Unstable](https://img.shields.io/packagist/v/softspring/doctrine-changelog-bundle?label=unstable&style=flat-square&include_prereleases)](https://packagist.org/packages/softspring/doctrine-changelog-bundle)
+[![License](https://img.shields.io/packagist/l/softspring/doctrine-changelog-bundle?style=flat-square)](LICENSE)
+[![PHP Version](https://img.shields.io/packagist/dependency-v/softspring/doctrine-changelog-bundle/php?style=flat-square)](composer.json)
+[![Downloads](https://img.shields.io/packagist/dt/softspring/doctrine-changelog-bundle?style=flat-square)](https://packagist.org/packages/softspring/doctrine-changelog-bundle)
 [![CI](https://img.shields.io/github/actions/workflow/status/softspring/doctrine-changelog-bundle/ci.yml?branch=6.0&style=flat-square&label=CI)](https://github.com/softspring/doctrine-changelog-bundle/actions/workflows/ci.yml)
+[![Coverage](https://codecov.io/gh/softspring/doctrine-changelog-bundle/branch/6.0/graph/badge.svg)](https://app.codecov.io/gh/softspring/doctrine-changelog-bundle/tree/6.0)
 
-Capture Doctrine entity changes and store them in Doctrine or BigQuery.
+Capture Doctrine entity changes, enrich them with request and user context, and store them through pluggable drivers such as Doctrine or BigQuery.
 
 ## Armonic
 
@@ -15,19 +16,17 @@ This package is part of [Armonic](https://softspring.es/en/armonic).
 
 ## Documentation
 
-[Armonic Documentation](https://armonic.softspring.es/latest/bundles/doctrine-changelog-bundle)
+[Armonic Documentation](https://armonic.softspring.es/latest/components/doctrine-changelog-bundle)
 
 ## Contributing
 
-Use the standard package commands before sending changes:
-
-```bash
-composer fix
-composer test
-composer test-bc
-```
+See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 [Report issues](https://github.com/softspring/doctrine-changelog-bundle/issues) and [send Pull Requests](https://github.com/softspring/doctrine-changelog-bundle/pulls)
+
+## Security
+
+See [SECURITY.md](SECURITY.md).
 
 ## License
 

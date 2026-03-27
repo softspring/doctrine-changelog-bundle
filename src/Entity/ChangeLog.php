@@ -5,6 +5,7 @@ namespace Softspring\DoctrineChangeLogBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Softspring\DoctrineChangeLogBundle\Collector\ChangeEntry;
 
+/** @phpstan-consistent-constructor */
 #[ORM\MappedSuperclass]
 #[ORM\Table(name: 'change_log')]
 #[ORM\Index(columns: ['timestamp'], name: 'timestamp_idx')]
@@ -36,18 +37,18 @@ class ChangeLog
     #[ORM\Column(name: 'entity_class', type: 'string', nullable: false)]
     protected ?string $entityClass = null;
 
-    #[ORM\Column(name: 'entity_id', type: 'json_array', nullable: false)]
+    #[ORM\Column(name: 'entity_id', type: 'json', nullable: false)]
     protected ?array $entityId = null;
 
     #[ORM\Column(name: 'action', type: 'string', nullable: true)]
     protected ?string $action = null;
 
-    #[ORM\Column(name: 'changes', type: 'json_array', nullable: false)]
+    #[ORM\Column(name: 'changes', type: 'json', nullable: false)]
     protected ?array $changes = null;
 
-    public static function create(ChangeEntry $entry): ChangeLog
+    public static function create(ChangeEntry $entry): static
     {
-        $changeLog = new self();
+        $changeLog = new static();
 
         // set basic data
         $changeLog->setTimestamp($entry->getTimestamp());
@@ -62,7 +63,7 @@ class ChangeLog
         $changeLog->setUsername($entry->getAttributes()->get('username'));
 
         // set request data
-        $changeLog->setIp($entry->getAttributes()->get('client_ip'));
+        $changeLog->setIp($entry->getAttributes()->get('request_ip'));
         $changeLog->setUserAgent($entry->getAttributes()->get('user_agent'));
         $changeLog->setRequestPath($entry->getAttributes()->get('request_path'));
         $changeLog->setRequestMethod($entry->getAttributes()->get('request_method'));

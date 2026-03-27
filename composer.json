@@ -1,6 +1,6 @@
 {
     "name": "softspring/doctrine-changelog-bundle",
-    "description": "Doctrine changelog collect and store into warehouse",
+    "description": "Doctrine changelog collection and storage component for Symfony applications",
     "license": "AGPL-3.0-or-later",
     "type": "symfony-bundle",
     "require": {
@@ -20,6 +20,7 @@
         "guzzlehttp/guzzle": "^7.8.2",
         "guzzlehttp/promises": "^2.0",
         "phpstan/phpstan": "^2.1",
+        "phpunit/phpunit": "^12.5",
         "rector/rector": "^2.3",
         "symfony/yaml": "^6.4 || ^7.4 || ^8.0"
     },
@@ -31,6 +32,11 @@
     "autoload": {
         "psr-4": {
             "Softspring\\DoctrineChangeLogBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Softspring\\DoctrineChangeLogBundle\\Tests\\": "tests/"
         }
     },
     "config": {
@@ -52,13 +58,12 @@
         ],
         "run-tests": [
             "composer validate --strict --no-check-lock --ansi",
-            "# XDEBUG_MODE=coverage vendor/bin/phpunit",
+            "XDEBUG_MODE=coverage vendor/bin/phpunit",
             "vendor/bin/rector process src tests --dry-run",
             "vendor/bin/phpstan analyse src tests --level 5",
             "vendor/bin/php-cs-fixer fix --dry-run --diff",
             "vendor/bin/yaml-lint .github/ -vvv --parse-tags",
-            "vendor/bin/yaml-lint config/ -vvv --parse-tags",
-            "vendor/bin/yaml-lint translations/ -vvv --parse-tags"
+            "vendor/bin/yaml-lint config/ -vvv --parse-tags"
         ],
         "test": [
             "composer update --no-scripts --ansi",

@@ -3,7 +3,6 @@
 namespace Softspring\DoctrineChangeLogBundle\Mapping;
 
 use Attribute;
-use Doctrine\Common\Annotations\Annotation;
 
 /**
  * @Annotation
@@ -11,6 +10,10 @@ use Doctrine\Common\Annotations\Annotation;
  * @Target("PROPERTY")
  */
 #[Attribute(Attribute::TARGET_PROPERTY)]
-/* final */ class Ignored extends Annotation
+/* final */ class Ignored
 {
+    public function __construct(
+        public readonly array $values = [],
+    ) {
+    }
 }
