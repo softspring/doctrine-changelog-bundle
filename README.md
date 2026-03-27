@@ -6,7 +6,7 @@
 [![PHP Version](https://img.shields.io/packagist/dependency-v/softspring/doctrine-changelog-bundle/php?style=flat-square)](composer.json)
 [![Downloads](https://img.shields.io/packagist/dt/softspring/doctrine-changelog-bundle?style=flat-square)](https://packagist.org/packages/softspring/doctrine-changelog-bundle)
 [![CI](https://img.shields.io/github/actions/workflow/status/softspring/doctrine-changelog-bundle/ci.yml?branch=6.0&style=flat-square&label=CI)](https://github.com/softspring/doctrine-changelog-bundle/actions/workflows/ci.yml)
-[![Coverage](https://codecov.io/gh/softspring/doctrine-changelog-bundle/branch/6.0/graph/badge.svg)](https://app.codecov.io/gh/softspring/doctrine-changelog-bundle/tree/6.0)
+[![Coverage](https://img.shields.io/codecov/c/github/softspring/doctrine-changelog-bundle?branch=6.0&style=flat-square)](https://codecov.io/gh/softspring/doctrine-changelog-bundle)
 
 Capture Doctrine entity changes, enrich them with request and user context, and store them through pluggable drivers such as Doctrine or BigQuery.
 
@@ -31,4 +31,3 @@ See [SECURITY.md](SECURITY.md).
 ## License
 
 This package is free and released under the [AGPL-3.0 license](LICENSE).
-
