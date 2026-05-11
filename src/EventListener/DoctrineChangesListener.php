@@ -84,7 +84,7 @@ class DoctrineChangesListener implements EventSubscriber
 
     protected function getChanges(object $entity, UnitOfWork $uow, EntityManagerInterface $em): array
     {
-        $metadata = $em->getClassMetadata(get_class($entity));
+        $em->getClassMetadata(get_class($entity));
         $changes = $uow->getEntityChangeSet($entity);
         $ignoredFields = $this->metadataReader->getIgnoredFields($entity);
 
@@ -94,23 +94,23 @@ class DoctrineChangesListener implements EventSubscriber
             }
         }
 
-        foreach ($changes as $field => [$old, $new]) {
-            if ($metadata->hasAssociation($field)) {
-                $association = $metadata->getAssociationMapping($field);
-                $a = 1;
-            } elseif ($metadata->hasField($field)) {
-                if (isset($metadata->embeddedClasses[$field])) {
-                    $embeddedMetadata = $metadata->embeddedClasses[$field];
-                    $b = 1;
-                } else {
-                    $mapping = $metadata->getFieldMapping($field);
-                    $a = 1;
-                }
-            } else {
-                $no = 1;
-                $a = 1;
-            }
-        }
+        //        foreach ($changes as $field => [$old, $new]) {
+        //            if ($metadata->hasAssociation($field)) {
+        //                $association = $metadata->getAssociationMapping($field);
+        //                $a = 1;
+        //            } elseif ($metadata->hasField($field)) {
+        //                if (isset($metadata->embeddedClasses[$field])) {
+        //                    $embeddedMetadata = $metadata->embeddedClasses[$field];
+        //                    $b = 1;
+        //                } else {
+        //                    $mapping = $metadata->getFieldMapping($field);
+        //                    $a = 1;
+        //                }
+        //            } else {
+        //                $no = 1;
+        //                $a = 1;
+        //            }
+        //        }
 
         return $changes;
     }
