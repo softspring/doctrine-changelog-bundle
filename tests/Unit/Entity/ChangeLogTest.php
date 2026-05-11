@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Softspring\DoctrineChangeLogBundle\Tests\Unit\Entity;
 
 use PHPUnit\Framework\TestCase;

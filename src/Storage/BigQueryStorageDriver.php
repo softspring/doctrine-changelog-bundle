@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Softspring\DoctrineChangeLogBundle\Storage;
 
 use Softspring\DoctrineChangeLogBundle\Collector\ChangeEntry;

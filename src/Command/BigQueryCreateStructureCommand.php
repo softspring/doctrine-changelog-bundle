@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Softspring\DoctrineChangeLogBundle\Command;
 
 class BigQueryCreateStructureCommand // extends Command implements ContainerAwareInterface
