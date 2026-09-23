@@ -82,7 +82,7 @@ class Schema
         $dataset = $this->bigQueryClient->dataset($this->config['dataset']);
 
         if (!$dataset->exists()) {
-            $dataset = $this->bigQueryClient->createDataset($this->config['dataset']);
+            return $this->bigQueryClient->createDataset($this->config['dataset']);
         }
 
         return $dataset;
